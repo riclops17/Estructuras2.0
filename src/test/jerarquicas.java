@@ -16,6 +16,12 @@ public class jerarquicas {
 
     public static void main(String[] args) {
         ArbolBinInt a = new ArbolBinInt();
+        ArbolBinInt b = new ArbolBinInt();
+        b.insertar(1, 0, 'I');
+        ListaInt l1 = new ListaInt();
+        l1.insertar(1, 1);
+        l1.insertar(2, 2);
+        l1.insertar(7, 2);
         a.insertar(1, 1, 'I');
         a.insertar(2, 1, 'I');
         a.insertar(3, 1, 'D');
@@ -29,7 +35,12 @@ public class jerarquicas {
         System.out.println(a.nivel(5));
         //System.out.println(a.altura());
         System.out.println(a.pertenece(8));*/
-        a.sumarRamas();
+        //a.sumarRamas();
+       /* System.out.println(a.toString());
+        System.out.println(a.listarAncestros(5));
+        System.out.println(a.verificarPatron(l1));*/
         System.out.println(a.toString());
+        System.out.println(a.clonar().toString());
+        
     }
 }

@@ -6,7 +6,7 @@
 package jerarquicas;
 
 import lineales.dinamicas.ListaInt;
-
+import lineales.dinamicas.ColaInt;
 /**
  *
  * @author rickybauch
@@ -117,6 +117,10 @@ public class ArbolBinInt {
             posordenAux(n.getDer(), l1);
             l1.insertar(n.getElem(), l1.longitud() + 1);
         }
+    }
+    private void PorNivel(NodoArbol n, ListaInt l1){
+       ColaInt q = new ColaInt(); 
+       q.poner(0)
     }
     public boolean pertenece (int elem){
         return perteneceAux(this.raiz , elem);
@@ -263,7 +267,49 @@ public class ArbolBinInt {
         }
         
        }
+    }
+        public ListaInt listarAncestros(int elem){
+            ListaInt l1 = new ListaInt();
+            listarAncestros(this.raiz,l1,elem);
+            return l1;
+        }
         
+    
+    private void listarAncestros(NodoArbol n,ListaInt l1, int elem ){
+        if(n!= null){
+            if(n.getElem() == elem){
+                l1.insertar(n.getElem(), l1.longitud() +1);
+            }else{
+                listarAncestros(n.getIzq(),l1,elem);
+                if(l1.esVacia()){
+                    listarAncestros(n.getDer(),l1,elem);
+                }
+                if(!l1.esVacia()){
+                    l1.insertar(n.getElem(), l1.longitud()+1);
+                }
+            }
+        }
+    }
+    public boolean verificarPatron(ListaInt l1){
+        return verificarPatronAux(this.raiz,l1, 1);
+    }
+    private boolean verificarPatronAux(NodoArbol n, ListaInt l1, int pos){
+        boolean res = false;
+        if(n!= null){
+            if( l1.longitud() == 1 && n.getIzq()== null && n.getDer()== null && n.getElem() == l1.recuperar(pos) ){
+                res = true;
+            }else{
+                if(n.getElem() == l1.recuperar(pos)){
+                    l1.eliminar(pos);
+                    res = verificarPatronAux(n.getIzq(), l1,pos);
+                
+                if(!res){
+                    res = verificarPatronAux(n.getDer(),l1,pos);
+                }
+              }
+            }
+        }
+        return res;
     }
     public String toString() {
         String s = "";
@@ -299,5 +345,41 @@ public class ArbolBinInt {
 
         }
         return s;
+    }
+    public ArbolBinInt clonar(){
+        ArbolBinInt c = new ArbolBinInt();
+        c.raiz = clonarAux(this.raiz);
+        return c;
+    }
+    private NodoArbol clonarAux(NodoArbol n){
+        NodoArbol nClon = null;
+        if(n != null){
+            if(n.getIzq() == null && n.getDer() == null){
+                nClon = new NodoArbol(n.getElem());
+            }else{
+                nClon = new NodoArbol(n.getElem());
+                nClon.setIzq(clonarAux(n.getIzq()));
+                nClon.setDer(clonarAux(n.getDer()));
+            }
+        }
+        return nClon;
+    }
+    public ArbolBinInt clonarInvertido(){
+        ArbolBinInt c = new ArbolBinInt();
+        c.raiz = clonarInvertidoAux(this.raiz);
+        return c;
+    }
+    private NodoArbol clonarInvertidoAux(NodoArbol n){
+        NodoArbol nClon = null;
+        if(n != null){
+            if(n.getIzq() == null && n.getDer() == null){
+                nClon = new NodoArbol(n.getElem());
+            }else{
+                nClon = new NodoArbol(n.getElem());
+                nClon.setIzq(clonarInvertidoAux(n.getDer()));
+                nClon.setDer(clonarInvertidoAux(n.getIzq()));
+            }
+        }
+        return nClon;
     }
 }

@@ -71,7 +71,7 @@ public class Practica1Parcial {
             pAux.apilar(p1.obtenerTope());
             p1.desapilar();
             
-            
+    
         }
         if(p1.esVacia()){
             res = false;

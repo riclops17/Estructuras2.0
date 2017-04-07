@@ -13,7 +13,7 @@ public class ColaInt {
     private int [] cola;
     private int frente ;
     private int fin;
-    private static  final int tam = 10 ;
+    private static  final int tam = 20 ;
     
     public ColaInt(){
     this.cola = new int [tam];   

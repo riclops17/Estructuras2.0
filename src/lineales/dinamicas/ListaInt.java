@@ -40,7 +40,6 @@ public class ListaInt {
                     i++;
 
                 }
-
                 NodoInt nuevo = new NodoInt(nElem, aux.getEnlace());
                 aux.setEnlace(nuevo);
             }
@@ -55,10 +54,11 @@ public class ListaInt {
         if (pos < 1 || pos > this.longitud) {
             res = false;
         } else {
-            int i = 1;
+           
             if (pos == 1) {
                 this.cabecera = this.cabecera.getEnlace();
             } else {
+                int i = 1;
                 NodoInt aux = this.cabecera;
                 while (i < pos - 1) {
                     aux = aux.getEnlace();
@@ -67,6 +67,7 @@ public class ListaInt {
                 aux.setEnlace(aux.getEnlace().getEnlace());
             }
             this.longitud--;
+            
         }
 
         return res;
@@ -135,6 +136,7 @@ public class ListaInt {
         }
         return s;
     }
+
     public boolean esVacia(){
         return this.cabecera == null;
     }
@@ -184,6 +186,7 @@ public class ListaInt {
      ListaInt clon = new ListaInt();
      if(this.cabecera != null){
          clon.cabecera = new NodoInt(this.cabecera.getElem(),clonarAux(this.cabecera.getEnlace()));
+         clon.longitud = this.longitud;
      }
      return clon;
    }
