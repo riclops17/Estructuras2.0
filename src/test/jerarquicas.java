@@ -41,6 +41,7 @@ public class jerarquicas {
         System.out.println(a.verificarPatron(l1));*/
         System.out.println(a.toString());
         System.out.println(a.clonar().toString());
+        System.out.println(a.PorNivel().toString());
         
     }
 }

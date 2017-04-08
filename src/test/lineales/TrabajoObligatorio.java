@@ -30,6 +30,8 @@ public class TrabajoObligatorio {
         l1.insertar(14 ,14);
         l1.insertar(15, 15);
         l1.insertar(16, 16);
+        l1.insertar(17, 17);
+        
        
        
         System.out.println(l1.toString());
@@ -40,11 +42,13 @@ public class TrabajoObligatorio {
     public static ColaInt revolverElementos(ListaInt lista, int k){
         int n = 1;
         ListaInt l1 = lista.clonar();
+         int longitud = lista.longitud();
         int cant = l1.longitud() / k;
         PilaInt pilaAux = new PilaInt();
         ColaInt c = new ColaInt();
         while(n <= cant){
             if(n % 2 == 0){
+                
                 for(  int i =1 ; i<= k;i++){
                     pilaAux.apilar(l1.recuperar(i));
                     
@@ -66,10 +70,21 @@ public class TrabajoObligatorio {
            } 
           n++;
         }
-        if(!l1.esVacia()){
-            
-         
+        if(longitud % k != 0){
+            for(  int i =1 ; i<= (longitud%k);i++){
+                    pilaAux.apilar(l1.recuperar(i));
+                    
+                }
+                while(!pilaAux.esVacia()){
+                    c.poner(pilaAux.obtenerTope());
+                    pilaAux.desapilar();
+                }
+                for(int r = 1 ; r <= (longitud%k);r++){
+                    l1.eliminar(1);
+                }
         }
+      
+           
         
         return c;
     }
