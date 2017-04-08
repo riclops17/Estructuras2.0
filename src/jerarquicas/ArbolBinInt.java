@@ -7,6 +7,7 @@ package jerarquicas;
 
 import lineales.dinamicas.ListaInt;
 import lineales.dinamicas.ColaInt;
+import lineales.dinamicas.ColaNodo;
 /**
  *
  * @author rickybauch
@@ -118,9 +119,24 @@ public class ArbolBinInt {
             l1.insertar(n.getElem(), l1.longitud() + 1);
         }
     }
-    private void PorNivel(NodoArbol n, ListaInt l1){
-       ColaInt q = new ColaInt(); 
-       q.poner(0)
+    public  ListaInt PorNivel(){
+       ListaInt l1 = new ListaInt();
+       ColaNodo q = new ColaNodo();
+       q.poner(this.raiz);
+       while(!q.esVacia()){
+        NodoArbol n = q.obtenerFrente();
+        q.sacar();
+        l1.insertar(n.getElem(), l1.longitud() + 1);
+         if (n.getIzq() != null) {
+                    q.poner(n.getIzq());
+                }
+
+                if (n.getDer() != null) {
+                    q.poner(n.getDer());
+                }
+       }
+       return l1;
+       
     }
     public boolean pertenece (int elem){
         return perteneceAux(this.raiz , elem);
