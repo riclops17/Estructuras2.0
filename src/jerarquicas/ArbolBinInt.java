@@ -428,6 +428,26 @@ public class ArbolBinInt {
             entreNivelesAux(n.getIzq(),l1,min,max,piso+1);
             entreNivelesAux(n.getDer(),l1,min,max,piso+1);
         }
-       
     }
+    public void eliminarHojas(){
+        eliminarHojasAux(this.raiz);
+    }
+    private void eliminarHojasAux(NodoArbol n){
+       if(n != null){
+          if( n.getIzq() != null && n.getIzq().getIzq() == null && n.getIzq().getDer() == null){
+                n.setIzq(null);
+            }
+           if( n.getDer() != null && n.getDer().getIzq() == null && n.getDer().getDer() == null){
+                   n.setDer(null);
+            }
+           
+               eliminarHojasAux(n.getIzq());
+               eliminarHojasAux(n.getDer());
+           } 
+           
+        }
+        
+       
+    
 }
+
