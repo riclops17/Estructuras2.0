@@ -6,7 +6,6 @@
 package jerarquicas;
 
 import lineales.dinamicas.ListaInt;
-import lineales.dinamicas.ColaInt;
 import lineales.dinamicas.ColaNodo;
 /**
  *
@@ -127,7 +126,7 @@ public class ArbolBinInt {
         NodoArbol n = q.obtenerFrente();
         q.sacar();
         l1.insertar(n.getElem(), l1.longitud() + 1);
-         if (n.getIzq() != null) {
+               if (n.getIzq() != null) {
                     q.poner(n.getIzq());
                 }
 
@@ -263,6 +262,27 @@ public class ArbolBinInt {
         }
         return res;
     }
+    public int altura2(){
+         int res;
+        if (this.raiz == null) {
+            res = -1;
+        } else {
+            res = alturaAux2(this.raiz);
+        }
+        return res;
+    }
+    private int alturaAux2(NodoArbol n){
+        int res  = 0;
+        if(n != null){
+            if(n.getIzq() == null && n.getDer() == null){
+                res = 0;
+            }else{
+                res = Math.max(alturaAux2(n.getIzq())+1, alturaAux2(n.getDer())+1);
+            }
+          
+        }
+          return res;
+    }
     public void sumarRamas(){
         sumarRamasAux(this.raiz, 0);
     }
@@ -354,7 +374,7 @@ public class ArbolBinInt {
         }
 
         if (n.getIzq() != null) {
-            s += stringAux(n.getIzq());
+            s += stringAux(n.getIzq() );
         }
         if (n.getDer() != null) {
             s += stringAux(n.getDer());
@@ -370,16 +390,14 @@ public class ArbolBinInt {
     private NodoArbol clonarAux(NodoArbol n){
         NodoArbol nClon = null;
         if(n != null){
-            if(n.getIzq() == null && n.getDer() == null){
-                nClon = new NodoArbol(n.getElem());
-            }else{
                 nClon = new NodoArbol(n.getElem());
                 nClon.setIzq(clonarAux(n.getIzq()));
                 nClon.setDer(clonarAux(n.getDer()));
             }
-        }
         return nClon;
-    }
+        }
+   
+    
     public ArbolBinInt clonarInvertido(){
         ArbolBinInt c = new ArbolBinInt();
         c.raiz = clonarInvertidoAux(this.raiz);
@@ -388,14 +406,28 @@ public class ArbolBinInt {
     private NodoArbol clonarInvertidoAux(NodoArbol n){
         NodoArbol nClon = null;
         if(n != null){
-            if(n.getIzq() == null && n.getDer() == null){
-                nClon = new NodoArbol(n.getElem());
-            }else{
+            
                 nClon = new NodoArbol(n.getElem());
                 nClon.setIzq(clonarInvertidoAux(n.getDer()));
                 nClon.setDer(clonarInvertidoAux(n.getIzq()));
             }
-        }
+        
         return nClon;
+    }
+    public ListaInt entreNivelesAux(int min, int max){
+        ListaInt l1 = new ListaInt();
+        entreNivelesAux(this.raiz,l1,min,max,0);
+        return l1;
+    }
+    
+    private void entreNivelesAux(NodoArbol n, ListaInt l1, int min, int max, int piso){
+        if (n != null){
+            if(min <= piso && max >= piso){
+                l1.insertar(n.getElem(), l1.longitud() +1);
+            }
+            entreNivelesAux(n.getIzq(),l1,min,max,piso+1);
+            entreNivelesAux(n.getDer(),l1,min,max,piso+1);
+        }
+       
     }
 }
