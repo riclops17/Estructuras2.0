@@ -48,7 +48,8 @@ public class jerarquicas {
         System.out.println(c.toString());
         System.out.println(a.altura2());     
         System.out.println(a.PorNivel().toString());*/
-        System.out.println(a.entreNivelesAux(2, 3).toString());
-        
+        //System.out.println(a.entreNivelesAux(2, 3).toString());
+        a.eliminarHojas();
+        System.out.println(a.toString());
     }
 }

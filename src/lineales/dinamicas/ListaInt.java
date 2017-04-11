@@ -161,6 +161,22 @@ public class ListaInt {
             
         }
     }
+    public void eliminarPares(){
+        NodoInt aux = this.cabecera;
+        while(!this.esVacia() && aux.getElem()%2 == 0 ){
+            aux = aux.getEnlace();
+            this.cabecera = this.cabecera.getEnlace();
+            this.longitud--;
+        }
+        while(aux.getEnlace() != null){
+            if(aux.getEnlace().getElem()%2 == 0){
+                aux.setEnlace(aux.getEnlace().getEnlace());
+                this.longitud--;
+            }else{
+                aux = aux.getEnlace();
+            }
+        }
+    }
 
     public void insertarPromedio() {
         NodoInt aux = this.cabecera;
@@ -175,6 +191,7 @@ public class ListaInt {
                 i++;
                 aux = aux.getEnlace();
             }
+            p = p + aux.getElem();
             prom = (p / i);
             NodoInt n = new NodoInt(prom, null);
             aux.setEnlace(n);
@@ -190,14 +207,14 @@ public class ListaInt {
      }
      return clon;
    }
-     private NodoInt clonarAux(NodoInt aux){
-         NodoInt aux2;
-         if(aux == null){
-             aux2 = null;
+     private NodoInt clonarAux(NodoInt n){
+         NodoInt res;
+         if(n == null){
+             res = null;
      }else{
-             aux2 = new NodoInt((aux.getElem()), clonarAux(aux.getEnlace()));
+             res = new NodoInt((n.getElem()), clonarAux(n.getEnlace()));
              
          }
-         return aux2;
+         return res;
    }
 }

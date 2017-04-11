@@ -15,18 +15,12 @@ public class Testlista {
     public static void main(String[] args) {
         ListaInt l1 = new ListaInt();
         ListaInt l2 = new ListaInt();
-        l1.insertar(5, 1);
-        l1.insertar(6, 2);
-        l1.insertar(9, 3);
-        l1.insertar(0, 4);
+        l1.insertar(1, 1);
+        l1.insertar(2, 2);
+        l1.insertar(3, 3);
+        l1.insertar(4, 4);
         l1.insertar(5, 5);
-        l1.insertar(6, 6);
-        l1.insertar(9, 7);
-        l1.insertar(0, 8);
-        l1.insertar(9, 9);
-        l1.insertar(6, 10);
-        l1.insertar(5, 11);
-        l1.insertar(3, 12);
+       
         
         
        
@@ -38,9 +32,13 @@ public class Testlista {
         //System.out.println(esCapicua(l2));
         //System.out.println(invertir(l2).toString());
         //System.out.println(comprobar(l1));
-        System.out.println(contarR(l1,0,1));
-      
-        
+        //System.out.println(contarR(l1,0,1));
+       /* System.out.println(l1.toString());
+         l1.eliminarPares();
+         System.out.println(l1.toString());
+        */
+        l1.insertarPromedio();
+        System.out.println(l1.toString());
     }
     public static ListaInt intercalar(ListaInt l1, ListaInt l2){
         ListaInt l3 = new ListaInt();
