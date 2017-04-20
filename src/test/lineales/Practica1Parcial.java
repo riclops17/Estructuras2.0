@@ -14,6 +14,7 @@ public class Practica1Parcial {
     public static void main(String[] args) {
         ColaInt c1 = new ColaInt();
         PilaInt p1 = new PilaInt();
+        PilaInt p2 = new PilaInt();
         p1.apilar(1);
         p1.apilar(2);
         p1.apilar(3);
@@ -23,7 +24,7 @@ public class Practica1Parcial {
         p1.apilar(3);
         p1.apilar(2);
         p1.apilar(1);
-        System.out.println(esSimetrica(p1,5));
+        System.out.println(esSimetrica(p2,5));
         c1.poner(1);
         c1.poner(2);
         c1.poner(0);
@@ -76,8 +77,8 @@ public class Practica1Parcial {
         if(p1.esVacia()){
             res = false;
         }
-        if(res){
-        p1.desapilar();
+        
+            p1.desapilar();
         
             while(!p1.esVacia() && res){
                 if(p1.obtenerTope() == pAux.obtenerTope()){
@@ -88,7 +89,7 @@ public class Practica1Parcial {
                 p1.desapilar();
                 pAux.desapilar();
             }
-        }
+        
         
         return res;
     }

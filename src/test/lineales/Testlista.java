@@ -20,7 +20,12 @@ public class Testlista {
         l1.insertar(3, 3);
         l1.insertar(4, 4);
         l1.insertar(5, 5);
-       
+        l1.insertar(6, 6);
+        l1.insertar(7, 7);
+        l1.insertar(8, 8);
+        l1.insertar(9, 9);
+        
+         
         
         
        
@@ -37,7 +42,9 @@ public class Testlista {
          l1.eliminarPares();
          System.out.println(l1.toString());
         */
-        l1.insertarPromedio();
+        //l1.insertarPromedio();
+        System.out.println(l1.toString());
+        l1.eliminarPrimos();
         System.out.println(l1.toString());
     }
     public static ListaInt intercalar(ListaInt l1, ListaInt l2){

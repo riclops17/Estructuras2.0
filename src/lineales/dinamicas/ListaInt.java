@@ -217,4 +217,35 @@ public class ListaInt {
          }
          return res;
    }
+     public void eliminarPrimos(){
+        NodoInt aux = this.cabecera;
+        while(!this.esVacia() && esPrimo(aux.getElem()) ){
+            aux = aux.getEnlace();
+            this.cabecera = this.cabecera.getEnlace();
+            this.longitud--;
+        }
+        while(aux.getEnlace() != null){
+            if(esPrimo(aux.getEnlace().getElem())){
+                aux.setEnlace(aux.getEnlace().getEnlace());
+                this.longitud--;
+            }else{
+                aux = aux.getEnlace();
+            }
+        }
+    }
+   private boolean esPrimo(int num){
+      int i = 2;
+      boolean res = true;
+      if( num == 1 ){
+          res = false;
+      }
+      while(i  < num && res){
+          if(num % i == 0){
+             res = false;
+          }
+          i++;
+      }
+      return res;
+   }
+   
 }

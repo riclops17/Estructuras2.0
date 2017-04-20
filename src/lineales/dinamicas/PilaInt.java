@@ -76,15 +76,15 @@ public class PilaInt {
      }
      return clon;
    }
-     private NodoInt clonarAux(NodoInt aux){
-         NodoInt aux2;
-         if(aux == null){
-             aux2 = null;
+     private NodoInt clonarAux(NodoInt n){
+         NodoInt res;
+         if(n == null){
+             res = null;
      }else{
-             aux2 = new NodoInt((aux.getElem()), clonarAux(aux.getEnlace()));
+             res = new NodoInt((n.getElem()), clonarAux(n.getEnlace()));
              
          }
-         return aux2;
+         return res;
    }
    
 }

@@ -263,16 +263,13 @@ public class ArbolBinInt {
         return res;
     }
     public int altura2(){
-         int res;
-        if (this.raiz == null) {
-            res = -1;
-        } else {
-            res = alturaAux2(this.raiz);
-        }
-        return res;
+         int res = -1;
+        
+       return res = alturaAux2(this.raiz);
+        
     }
     private int alturaAux2(NodoArbol n){
-        int res  = 0;
+        int res  = -1;
         if(n != null){
             if(n.getIzq() == null && n.getDer() == null){
                 res = 0;
@@ -446,6 +443,43 @@ public class ArbolBinInt {
            } 
            
         }
+    public ListaInt listarCaminoMasLargo(){
+        ListaInt visitados = new ListaInt();
+        ListaInt caminoLargo = new ListaInt();
+        return listarCaminoMasLargoAux(this.raiz,visitados,caminoLargo);
+        
+    }
+    private ListaInt listarCaminoMasLargoAux(NodoArbol n, ListaInt visitados , ListaInt l1){
+        if(n!= null){
+            visitados.insertar(n.getElem(), visitados.longitud()+1);
+            if(n.getIzq() == null && n.getDer() == null  && visitados.longitud() > l1.longitud()){
+                l1 = visitados.clonar();
+            }
+            l1 = listarCaminoMasLargoAux(n.getIzq(),visitados,l1);
+            l1 = listarCaminoMasLargoAux(n.getDer(),visitados,l1);
+            visitados.eliminar(visitados.longitud());
+        }
+        return l1;
+    }
+    public ArbolBinInt clonarSubArbol(int elem){
+        ArbolBinInt c = new ArbolBinInt();
+        c.raiz = clonarAux(obtenerNodo(this.raiz,elem));
+        return c;
+        
+    }
+    public void eliminarHijoIzq(int elem){
+        eliminarHijoIzqAux(this.raiz,elem);
+    }
+    private void eliminarHijoIzqAux(NodoArbol n , int elem){
+        if(n != null){
+            if( n.getIzq() != null && n.getElem() == elem){
+                n.setIzq(null);
+            }
+            eliminarHijoIzqAux(n.getIzq(),elem);
+            eliminarHijoIzqAux(n.getDer(),elem);
+        }
+    }
+    
         
        
     
