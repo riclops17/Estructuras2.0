@@ -247,5 +247,32 @@ public class ListaInt {
       }
       return res;
    }
+   public void compactar(int x){
+       int i;
+       int n = 1;
+       int nLongitud = this.longitud()/2;
+       int mull = 1;
+       NodoInt aux;
+       if(this.longitud % x == 0){
+           aux = this.cabecera;
+           i= 1;
+           mull = 1;
+       while(n <= nLongitud){ 
+           while(i <= x){
+             mull = mull * aux.getElem();
+             aux = aux.getEnlace();
+             this.cabecera = this.cabecera.getEnlace();
+             i++;
+           }
+           while(aux.getEnlace() != null){
+               aux = aux.getEnlace();
+           }
+           NodoInt r = new NodoInt(mull,null);
+           aux.setEnlace(r);
+           n++;
+           
+       }
+   }
    
+}
 }

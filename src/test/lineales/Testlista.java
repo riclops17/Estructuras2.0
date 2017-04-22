@@ -16,14 +16,13 @@ public class Testlista {
         ListaInt l1 = new ListaInt();
         ListaInt l2 = new ListaInt();
         l1.insertar(1, 1);
-        l1.insertar(2, 2);
-        l1.insertar(3, 3);
-        l1.insertar(4, 4);
-        l1.insertar(5, 5);
-        l1.insertar(6, 6);
-        l1.insertar(7, 7);
-        l1.insertar(8, 8);
-        l1.insertar(9, 9);
+        l1.insertar(3, 2);
+        l1.insertar(5, 3);
+        l2.insertar(2, 1);
+        l2.insertar(4, 2);
+        l2.insertar(6, 3);
+        l2.insertar(7, 4);
+        
         
          
         
@@ -43,25 +42,23 @@ public class Testlista {
          System.out.println(l1.toString());
         */
         //l1.insertarPromedio();
-        System.out.println(l1.toString());
-        l1.eliminarPrimos();
-        System.out.println(l1.toString());
+        
+        System.out.println(intercalar(l1,l2).toString());
     }
     public static ListaInt intercalar(ListaInt l1, ListaInt l2){
         ListaInt l3 = new ListaInt();
-        if(l1.esVacia() ){
-            l3 = l2;
-        }else{
-            if(l2.esVacia()){
-                l3 = l1;
-            }else{
-                int i = 1;
-                while( i <= l2.longitud()){
-                    if(i <= l1.longitud()){
-                        l3.insertar(l2.recuperar(i), i);
-                    }
-                }
-            }
+         while(!l1.esVacia()|| !l2.esVacia()){
+             if(!l1.esVacia()){
+                 l3.insertar(l1.recuperar(1), l3.longitud()+1);
+                 l1.eliminar(1);
+             }   
+             if(!l2.esVacia()){
+                 l3.insertar(l2.recuperar(1), l3.longitud()+1);
+                l2.eliminar(1);
+             }
+            
+             
+             
         }
         return l3;
     }

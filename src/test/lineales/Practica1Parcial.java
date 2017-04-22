@@ -6,6 +6,7 @@
 package test.lineales;
 import lineales.dinamicas.ColaInt;
 import lineales.dinamicas.PilaInt;
+import lineales.dinamicas.ListaInt;
 /**
  *
  * @author rickybauch
@@ -15,6 +16,7 @@ public class Practica1Parcial {
         ColaInt c1 = new ColaInt();
         PilaInt p1 = new PilaInt();
         PilaInt p2 = new PilaInt();
+        ListaInt l1 = new ListaInt();
         p1.apilar(1);
         p1.apilar(2);
         p1.apilar(3);
@@ -24,15 +26,17 @@ public class Practica1Parcial {
         p1.apilar(3);
         p1.apilar(2);
         p1.apilar(1);
-        System.out.println(esSimetrica(p2,5));
+        //System.out.println(esSimetrica(p2,5));
         c1.poner(1);
         c1.poner(2);
-        c1.poner(0);
         c1.poner(3);
-        c1.poner(0);
         c1.poner(4);
         c1.poner(5);
         c1.poner(6);
+        c1.poner(8);
+        c1.poner(9);
+        
+        System.out.println(generar2(c1,3).toString());
        // System.out.println(generar(c1).toString());
     }
     public static ColaInt generar(ColaInt c1){
@@ -92,5 +96,34 @@ public class Practica1Parcial {
         
         
         return res;
+    }
+    public static ListaInt generar2(ColaInt q , int k){
+        ListaInt l1 = new ListaInt();
+        ColaInt c2 = new ColaInt();
+        PilaInt p = new PilaInt();
+        int i = 1;
+        while( !q.esVacia()){
+            i = 1;
+            while(i <= k && !q.esVacia()){
+               l1.insertar(q.obtenerFrente(), l1.longitud() +1);
+                c2.poner(q.obtenerFrente());
+                p.apilar(q.obtenerFrente());
+                q.sacar();
+                i++;
+            }
+            while(!c2.esVacia()){
+                
+                l1.insertar(c2.obtenerFrente(), l1.longitud() + 1);
+                c2.sacar();
+            }
+            while(!p.esVacia()){
+                l1.insertar(p.obtenerTope(), l1.longitud() + 1);
+                p.desapilar();
+            }
+            l1.insertar(0, l1.longitud() +1);
+            
+        }
+        return l1;
+        
     }
 }

@@ -479,9 +479,29 @@ public class ArbolBinInt {
             eliminarHijoIzqAux(n.getDer(),elem);
         }
     }
+    public boolean equals(ArbolBinInt otro){
+        return equalsAux(this.raiz,otro.raiz);
+    }
+    private boolean equalsAux(NodoArbol n, NodoArbol n2){
+        boolean res = false;
+        if(n != null){
+            if(n.getIzq() != null && n.getDer() != null && n.getElem() == n2.getElem()){
+                res = true;
+            }else{
+                res = equalsAux(n.getIzq(), n2.getIzq());
+                 if(!res){
+                    res = equalsAux(n.getDer(),n2.getDer());
+  
+                 }
+             }
+    }
+        return res;
+    }
+}
+        
     
         
        
     
-}
+
 

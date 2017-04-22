@@ -19,6 +19,7 @@ public class jerarquicas {
         ArbolBinInt b = new ArbolBinInt();
         b.insertar(1, 0, 'I');
         ListaInt l1 = new ListaInt();
+        
         l1.insertar(4, 1);
         l1.insertar(3, 2);
         l1.insertar(2, 3);
@@ -29,6 +30,13 @@ public class jerarquicas {
         a.insertar(3, 1, 'D');
         a.insertar(4, 3, 'I');
         a.insertar(5, 3, 'D');
+        
+           
+        b.insertar(1, 1, 'I');
+        b.insertar(2, 1, 'I');
+        b.insertar(3, 1, 'D');
+        b.insertar(5, 3, 'I');
+        b.insertar(5, 3, 'D');
         
         /*System.out.println(a.listarPreorden().toString());
         System.out.println(a.listarInorden().toString());
@@ -50,10 +58,12 @@ public class jerarquicas {
         System.out.println(a.PorNivel().toString());*/
         //System.out.println(a.entreNivelesAux(2, 3).toString());
         //a.eliminarHojas();
-        System.out.println(a.toString());
+       /* System.out.println(a.toString());
         System.out.println(a.listarCaminoMasLargo().toString());
         System.out.println(a.verificarPatron(l1));
-        a.eliminarHijoIzq(1);
+        a.eliminarHijoIzq(3);
         System.out.println(a.toString());
+        */
+        System.out.println(a.equals(b));
     }
 }
