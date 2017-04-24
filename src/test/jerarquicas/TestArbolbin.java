@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package test.jerarquicas;
 
-import lineales.dinamicas.ListaInt;
 import jerarquicas.ArbolBinInt;
+import lineales.dinamicas.ListaInt;
 
 /**
  *
  * @author rickybauch
  */
-public class jerarquicas {
-
+public class TestArbolbin {
+    
     public static void main(String[] args) {
         ArbolBinInt a = new ArbolBinInt();
         ArbolBinInt b = new ArbolBinInt();
@@ -67,3 +67,5 @@ public class jerarquicas {
         System.out.println(a.equals(b));
     }
 }
+
+

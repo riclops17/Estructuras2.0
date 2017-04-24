@@ -9,12 +9,11 @@ package lineales.dinamicas;
  *
  * @author rickybauch
  */
-public class ListaInt {
-
-    private NodoInt cabecera;
+public class Lista {
+     private Nodo cabecera;
     private int longitud;
 
-    public ListaInt() {
+    public Lista() {
         this.cabecera = null;
         this.longitud = 0;
     }
@@ -23,7 +22,7 @@ public class ListaInt {
         return this.longitud;
     }
 
-    public boolean insertar(int nElem, int pos) {
+    public boolean insertar(Object nElem, int pos) {
         boolean res = true;
         int i = 1;
         if (pos < 1 || pos > this.longitud + 1) {
@@ -31,16 +30,16 @@ public class ListaInt {
         } else {
             if (pos == 1) {
                 // cre un nuevo nodo y se enlaza en la cabecera
-                this.cabecera = new NodoInt(nElem, this.cabecera);
+                this.cabecera = new Nodo(nElem, this.cabecera);
             } else {
-                NodoInt aux = this.cabecera;
+                Nodo aux = this.cabecera;
                 // avanza hasta el elemento pos -1
                 while (i < pos - 1) {
                     aux = aux.getEnlace();
                     i++;
 
                 }
-                NodoInt nuevo = new NodoInt(nElem, aux.getEnlace());
+                Nodo nuevo = new Nodo(nElem, aux.getEnlace());
                 aux.setEnlace(nuevo);
             }
             this.longitud++;
@@ -59,7 +58,7 @@ public class ListaInt {
                 this.cabecera = this.cabecera.getEnlace();
             } else {
                 int i = 1;
-                NodoInt aux = this.cabecera;
+                Nodo aux = this.cabecera;
                 while (i < pos - 1) {
                     aux = aux.getEnlace();
                     i++;
@@ -73,12 +72,12 @@ public class ListaInt {
         return res;
     }
 
-    public int recuperar(int pos) {
-        int r = Integer.MIN_VALUE;
+    public Object recuperar(int pos) {
+        Object r = Integer.MIN_VALUE;
         boolean res = true;
         int i = 1;
         if (pos >= 1 && pos <= this.longitud) {
-            NodoInt aux = this.cabecera;
+            Nodo aux = this.cabecera;
             while (aux != null && res) {
                 if (i == pos) {
                     res = false;
@@ -95,12 +94,12 @@ public class ListaInt {
 
     }
 
-    public int localizar(int elem) {
-        NodoInt aux = this.cabecera;
+    public int localizar(Object elem) {
+        Nodo aux = this.cabecera;
         boolean res = true;
         int i = 1;
         while (aux != null && res) {
-            if (aux.getElem() == elem) {
+            if (aux.getElem().equals(elem)) {
                 res = false;
             } else {
                 aux = aux.getEnlace();
@@ -118,7 +117,7 @@ public class ListaInt {
 
         String s = "";
         //se ubica al principio de la estrucutra
-        NodoInt aux = this.cabecera;
+        Nodo aux = this.cabecera;
         if (this.cabecera == null) {
             s = "lista vacia";
         } else {
@@ -141,98 +140,51 @@ public class ListaInt {
         return this.cabecera == null;
     }
 
-    public void eliminarMayores(int elem) {
-        // ******
-       NodoInt aux = this.cabecera;
-       while(aux != null &&  aux.getElem() > elem) {
-            aux = aux.getEnlace();
-            this.cabecera = this.cabecera.getEnlace();
-            this.longitud--;
-        } 
-       while (aux.getEnlace() != null) {
-                if (aux.getEnlace().getElem()  > elem) {
-                    aux.setEnlace(aux.getEnlace().getEnlace());
-                    this.longitud--;
-                    
-                }else{
-                    
-                aux = aux.getEnlace();
-            }
-            
-        }
-    }
-    public void eliminarPares(){
-        NodoInt aux = this.cabecera;
-        while(!this.esVacia() && aux.getElem()%2 == 0 ){
-            aux = aux.getEnlace();
-            this.cabecera = this.cabecera.getEnlace();
-            this.longitud--;
-        }
-        while(aux.getEnlace() != null){
-            if(aux.getEnlace().getElem()%2 == 0){
-                aux.setEnlace(aux.getEnlace().getEnlace());
-                this.longitud--;
-            }else{
-                aux = aux.getEnlace();
-            }
-        }
-    }
+
+   
+    
 
     public void insertarPromedio() {
-        NodoInt aux = this.cabecera;
+        Nodo aux = this.cabecera;
         int p = 0;
         int i = 0;
         int prom;
         if (aux == null) {
-            this.cabecera = new NodoInt(0, null);
+            this.cabecera = new Nodo(0, null);
         } else {
             while (aux.getEnlace() != null) {
-                p = p + aux.getElem();
+                p = p  +(int) aux.getElem();
                 i++;
                 aux = aux.getEnlace();
             }
-            p = p + aux.getElem();
+            p = p + (int)aux.getElem();
             prom = (p / i);
-            NodoInt n = new NodoInt(prom, null);
+            Nodo n = new Nodo(prom, null);
             aux.setEnlace(n);
         }
         this.longitud++;
 
     }
-    public ListaInt clonar(){
-     ListaInt clon = new ListaInt();
+    public Lista clonar(){
+     Lista clon = new Lista();
      if(this.cabecera != null){
-         clon.cabecera = new NodoInt(this.cabecera.getElem(),clonarAux(this.cabecera.getEnlace()));
+         clon.cabecera = new Nodo(this.cabecera.getElem(),clonarAux(this.cabecera.getEnlace()));
          clon.longitud = this.longitud;
      }
      return clon;
    }
-     private NodoInt clonarAux(NodoInt n){
-         NodoInt res;
+     private Nodo clonarAux(Nodo n){
+         Nodo res;
          if(n == null){
              res = null;
      }else{
-             res = new NodoInt((n.getElem()), clonarAux(n.getEnlace()));
+             res = new Nodo((n.getElem()), clonarAux(n.getEnlace()));
              
          }
          return res;
    }
-     public void eliminarPrimos(){
-        NodoInt aux = this.cabecera;
-        while(!this.esVacia() && esPrimo(aux.getElem()) ){
-            aux = aux.getEnlace();
-            this.cabecera = this.cabecera.getEnlace();
-            this.longitud--;
-        }
-        while(aux.getEnlace() != null){
-            if(esPrimo(aux.getEnlace().getElem())){
-                aux.setEnlace(aux.getEnlace().getEnlace());
-                this.longitud--;
-            }else{
-                aux = aux.getEnlace();
-            }
-        }
-    }
+    
+    
    private boolean esPrimo(int num){
       int i = 2;
       boolean res = true;
@@ -247,35 +199,7 @@ public class ListaInt {
       }
       return res;
    }
-   public void compactar(int x){
-       int i;
-       int n = 1;
-       int nLongitud = this.longitud()/2;
-       int mull = 1;
-       NodoInt aux;
-       if(this.longitud % x == 0){
-          
-       while(n <= nLongitud){ 
-          aux = this.cabecera;
-           i= 1;
-           mull = 1;
-           while(i <= x){
-             mull = mull * aux.getElem();
-             aux = aux.getEnlace();
-             this.cabecera = this.cabecera.getEnlace();
-             this.longitud--;
-             i++;
-           }
-           while(aux.getEnlace() != null){
-               aux = aux.getEnlace();
-           }
-           NodoInt r = new NodoInt(mull,null);
-           aux.setEnlace(r);
-           this.longitud++;
-           n++;
-           
-       }
-   }
+  
    
 }
-}
+
