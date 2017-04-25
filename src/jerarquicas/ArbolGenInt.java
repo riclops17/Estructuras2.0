@@ -267,14 +267,45 @@ public class ArbolGenInt {
             }
         }
     }
+    
     public ListaInt listarCaminoMasLargo(){
        ListaInt visitados = new ListaInt();
        ListaInt caminoLargo = new ListaInt();
         return listarCaminoMasLargoAux(this.raiz,visitados,caminoLargo);
     }
     private ListaInt listarCaminoMasLargoAux(NodoGen n, ListaInt visitados,ListaInt l1){
-        if(n != null)
+        if(n != null){
+            visitados.insertar(n.getElem(), visitados.longitud()+1);
+            if(n.getEIzq() == null && visitados.longitud() > l1.longitud()){
+                l1 = visitados.clonar();
+            }
+                NodoGen hijo = n.getEIzq();
+                while(hijo != null){
+                    l1 = listarCaminoMasLargoAux(hijo,visitados,l1);
+                    hijo = hijo.getHDer();
+                   
+               }
+                 visitados.eliminar(visitados.longitud());
+               
+        }
+        return l1;
     }
+    public ArbolGenInt clonar(){
+        ArbolGenInt c = new ArbolGenInt();
+        c.raiz = clonarAux(this.raiz);
+        return c;
+    }
+    private NodoGen clonarAux(NodoGen n){
+        NodoGen nodoClon = null;
+        if(n != null){
+           nodoClon = new NodoGen(n.getElem());
+           nodoClon.setEIzq (clonarAux(n.getEIzq()));
+           nodoClon.setHDer(clonarAux(n.getHDer()));
+           
+       }
+        return nodoClon;
+    }
+    
     
     
     

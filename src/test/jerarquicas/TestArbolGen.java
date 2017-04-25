@@ -13,6 +13,7 @@ public class TestArbolGen {
     public static void main(String[] args) {
         ArbolGenInt a = new ArbolGenInt();
         ArbolGenInt b = new ArbolGenInt();
+        ArbolGenInt c = new ArbolGenInt();
         a.insertar(1, 1);
         a.insertar(2, 1);
         a.insertar(3, 1);
@@ -24,9 +25,10 @@ public class TestArbolGen {
         b.insertar(1, 1);
         b.insertar(3, 1);
         b.insertar(2, 1);
-        b.insertar(8, 2);
-        b.insertar(4, 3);
-        b.insertar(5, 4);
+        b.insertar(4, 1);
+        b.insertar(5, 3);
+       
+       
        
         System.out.println(a.toString());
         /*System.out.println(a.pertenece(8));
@@ -38,8 +40,9 @@ public class TestArbolGen {
        */
         //a.eliminarEHijoIzq(4);
          
+        c = a.clonar();
         System.out.println("");
-        System.out.println(b.listarAncestros(8));
+        System.out.println(c.toString());
         
     }
 }
