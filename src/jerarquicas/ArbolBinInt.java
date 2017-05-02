@@ -358,16 +358,16 @@ public class ArbolBinInt {
     private String stringAux(NodoArbol n) {
         String s = "" + n.getElem();
         if (n.getIzq() != null) {
-            s = s + "HI:" + n.getIzq().getElem();
+            s = s + " - HI: " + n.getIzq().getElem();
 
         } else {
-            s = s + "HI:#";
+            s = s + " - HI: #";
         }
         if (n.getDer() != null) {
-            s = s + "HD:" + n.getDer().getElem() + "\n";
+            s = s + " - HD: " + n.getDer().getElem() + "\n";
 
         } else {
-            s = s + "HD:#" + "\n";
+            s = s + " - HD: #" + "\n";
         }
 
         if (n.getIzq() != null) {
@@ -484,17 +484,20 @@ public class ArbolBinInt {
     }
     private boolean equalsAux(NodoArbol n, NodoArbol n2){
         boolean res = false;
-        if(n != null){
-            if(n.getIzq() != null && n.getDer() != null && n.getElem() == n2.getElem()){
+        if(n != null && n2 != null ){
+            if(  n2.getIzq()== null && n2.getDer()== null && n.getIzq() == null && n.getDer() == null && n.getElem() == n2.getElem()){
                 res = true;
             }else{
-                res = equalsAux(n.getIzq(), n2.getIzq());
-                 if(!res){
+                if(n.getElem() == n2.getElem()){
+                    res = equalsAux(n.getIzq(),n2.getIzq());
+                }
+                if( !res ){
                     res = equalsAux(n.getDer(),n2.getDer());
-  
-                 }
+                }
+            }
+             
              }
-    }
+    
         return res;
     }
 }

@@ -17,7 +17,7 @@ public class TestArbolbin {
     public static void main(String[] args) {
         ArbolBinInt a = new ArbolBinInt();
         ArbolBinInt b = new ArbolBinInt();
-        b.insertar(1, 0, 'I');
+        
         ListaInt l1 = new ListaInt();
         
         l1.insertar(4, 1);
@@ -27,16 +27,17 @@ public class TestArbolbin {
      
         a.insertar(1, 1, 'I');
         a.insertar(2, 1, 'I');
-        a.insertar(3, 1, 'D');
+        a.insertar(3, 2, 'D');
         a.insertar(4, 3, 'I');
-        a.insertar(5, 3, 'D');
+        a.insertar(5, 4, 'D');
         
            
         b.insertar(1, 1, 'I');
         b.insertar(2, 1, 'I');
-        b.insertar(3, 1, 'D');
+        b.insertar(3, 2, 'D');
         b.insertar(5, 3, 'I');
-        b.insertar(5, 3, 'D');
+        b.insertar(5, 4, 'D');
+       
         
         /*System.out.println(a.listarPreorden().toString());
         System.out.println(a.listarInorden().toString());
@@ -64,6 +65,8 @@ public class TestArbolbin {
         a.eliminarHijoIzq(3);
         System.out.println(a.toString());
         */
+        System.out.println(a.toString());
+        System.out.println(b.toString());
         System.out.println(a.equals(b));
     }
 }

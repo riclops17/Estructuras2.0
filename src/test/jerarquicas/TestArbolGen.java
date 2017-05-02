@@ -18,19 +18,17 @@ public class TestArbolGen {
         a.insertar(2, 1);
         a.insertar(3, 1);
         a.insertar(4, 1);
-        a.insertar(5, 4);
-        a.insertar(6, 4);
-        a.insertar(7, 6);
-        a.insertar(8, 6);
+        a.insertar(5, 2);
+        
         b.insertar(1, 1);
-        b.insertar(3, 1);
         b.insertar(2, 1);
+        b.insertar(3, 1);
         b.insertar(4, 1);
-        b.insertar(5, 3);
-       
-       
+        b.insertar(5, 2);
+        b.insertar(6, 5);
        
         System.out.println(a.toString());
+        
         /*System.out.println(a.pertenece(8));
         System.out.println(a.entreNiveles(1, 2).toString());
         System.out.println(a.frontera());
@@ -40,9 +38,10 @@ public class TestArbolGen {
        */
         //a.eliminarEHijoIzq(4);
          
-        c = a.clonar();
+   
         System.out.println("");
-        System.out.println(c.toString());
+        System.out.println(b.toString());
+        System.out.println(a.equals(b));
         
     }
 }

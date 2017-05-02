@@ -250,7 +250,7 @@ public class ListaInt {
    public void compactar(int x){
        int i;
        int n = 1;
-       int nLongitud = this.longitud()/2;
+       int nLongitud = this.longitud()/x;
        int mull = 1;
        NodoInt aux;
        if(this.longitud % x == 0){

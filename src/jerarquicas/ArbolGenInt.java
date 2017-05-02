@@ -110,8 +110,9 @@ public class ArbolGenInt {
             res = 0;
         }else{
             NodoGen hijo = n.getEIzq();
+             res = alturaAux(hijo) +1;
             while(hijo != null && res == -1){
-                res = alturaAux(hijo) +1;
+                res = alturaAux(hijo) ;
                 hijo = hijo.getHDer();
             }
         }
@@ -305,6 +306,50 @@ public class ArbolGenInt {
        }
         return nodoClon;
     }
+    public boolean verificarPatron(ListaInt l1){
+        return verificarPatronAux(this.raiz,l1);
+    }
+    private boolean verificarPatronAux(NodoGen n ,ListaInt l1){
+        boolean res = true;
+       if (n != null) {
+            NodoGen hijo = n.getEIzq();
+            if (hijo != null) {
+                res = verificarPatronAux(hijo, l1);
+            }
+
+           if (!l1.esVacia() && n.getElem()== l1.recuperar(1)&& res) {  
+                l1.eliminar(1);
+                while (hijo != null && res) {
+                    res = verificarPatronAux(hijo.getHDer(), l1);
+                    hijo = hijo.getHDer();
+                }
+               } else {
+                res = false;
+              }
+        }
+       return res;
+    }
+    public boolean equals(ArbolGenInt otro){
+        return equalsAux(this.raiz,otro.raiz);
+    }
+    private boolean equalsAux(NodoGen n , NodoGen n2){
+        boolean res = false;
+        if(n!= null && n2 != null){
+            if(n.getEIzq()== null && n2.getEIzq() == null && n.getElem() == n2.getElem()){
+                res = true;
+            }else{
+                NodoGen hijo =  n.getEIzq();
+                NodoGen hijo2 = n2.getEIzq();
+                while(hijo != null && hijo2 != null && res == false){
+                    res = equalsAux(hijo ,hijo2);
+                    hijo = n.getHDer();
+                    hijo2 = n.getHDer();
+                }
+            }
+        }
+        return res;
+    }
+    
     
     
     

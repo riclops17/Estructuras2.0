@@ -43,7 +43,7 @@ public class Testlista {
          System.out.println(l1.toString());
         */
         //l1.insertarPromedio();
-        l2.compactar(3);
+        l2.compactar(2);
         System.out.println(l2.toString());
         //System.out.println(intercalar(l1,l2).toString());
     }
