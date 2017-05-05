@@ -27,17 +27,21 @@ public class TestArbolbin {
      
         a.insertar(1, 1, 'I');
         a.insertar(2, 1, 'I');
-        a.insertar(3, 2, 'D');
-        a.insertar(4, 3, 'I');
-        a.insertar(5, 4, 'D');
+        a.insertar(3, 1, 'D');
+        a.insertar(4, 2, 'I');
+        a.insertar(7, 2, 'D');
+        a.insertar(6, 3, 'I');
+        a.insertar(7, 3, 'D');
         
            
         b.insertar(1, 1, 'I');
         b.insertar(2, 1, 'I');
-        b.insertar(3, 2, 'D');
-        b.insertar(5, 3, 'I');
-        b.insertar(5, 4, 'D');
-       
+        b.insertar(3, 1, 'D');
+        b.insertar(4, 2, 'I');
+        b.insertar(5, 2, 'D');
+        b.insertar(6, 3, 'I');
+        b.insertar(7, 3, 'D');
+        
         
         /*System.out.println(a.listarPreorden().toString());
         System.out.println(a.listarInorden().toString());

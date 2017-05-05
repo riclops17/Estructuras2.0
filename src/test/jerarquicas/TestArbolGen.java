@@ -25,7 +25,6 @@ public class TestArbolGen {
         b.insertar(3, 1);
         b.insertar(4, 1);
         b.insertar(5, 2);
-        b.insertar(6, 5);
        
         System.out.println(a.toString());
         

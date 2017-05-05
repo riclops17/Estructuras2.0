@@ -491,7 +491,7 @@ public class ArbolBinInt {
                 if(n.getElem() == n2.getElem()){
                     res = equalsAux(n.getIzq(),n2.getIzq());
                 }
-                if( !res ){
+                if( res == true ){
                     res = equalsAux(n.getDer(),n2.getDer());
                 }
             }

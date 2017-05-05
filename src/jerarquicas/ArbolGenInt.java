@@ -340,7 +340,7 @@ public class ArbolGenInt {
             }else{
                 NodoGen hijo =  n.getEIzq();
                 NodoGen hijo2 = n2.getEIzq();
-                while(hijo != null && hijo2 != null && res == false){
+                while(hijo != null && hijo2 != null && res == true){
                     res = equalsAux(hijo ,hijo2);
                     hijo = n.getHDer();
                     hijo2 = n.getHDer();
@@ -349,6 +349,7 @@ public class ArbolGenInt {
         }
         return res;
     }
+      
     
     
     
