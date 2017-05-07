@@ -11,14 +11,32 @@ package conjuntistas;
  */
 public class ArbolHeap {
     
-   private final int TAM = 10;
-   private  Comparable[] heap;
+   private final int TAM = 20;
+   private  int[] heap;
    private  int ultimo = 0;
    
    public ArbolHeap(){
-       this.heap = new Comparable[TAM];
+       this.heap = new int[TAM];
        this.ultimo = 0;
    }
+   public boolean insertar(int elem) {
+        boolean res = false;
+        int a;
+        ultimo++;
+        if (ultimo < TAM) {
+            heap[ultimo] = elem;
+            int aux = ultimo;
+            while (heap[aux] < heap[aux / 2]) {
+                a = heap[aux];
+                heap[aux] = heap[aux / 2];
+                heap[aux / 2] = a;
+                aux = aux / 2;
+            }
+            res = true;
+        } 
+        
+        return res;
+    }
    public boolean eliminarCima(){
        boolean res;
       if(this.ultimo == 0){
@@ -36,7 +54,7 @@ public class ArbolHeap {
    }
    private void hacerBajar(int posicion){
        int hijoMenor;
-       Object temp = this.heap[posicion];
+       int temp = this.heap[posicion];
        boolean salir = false;
        while( !salir){
            hijoMenor = posicion * 2;
@@ -44,11 +62,11 @@ public class ArbolHeap {
                // temp tiene hijos(al menos uno)
                if(hijoMenor < this.ultimo){
                    // hijo menor tiene hermano derecho
-                   if(this.heap[hijoMenor +1].compareTo(this.heap[hijoMenor])>0) {
+                   if(this.heap[hijoMenor +1] < this.heap[hijoMenor]) {
                        hijoMenor++;
                    }
                }
-               if(this.heap[hijoMenor].compareTo(temp)<0){
+               if(this.heap[hijoMenor] < temp){
                    this.heap[posicion] = this.heap[hijoMenor];
                    posicion = hijoMenor;
                }else{
@@ -60,11 +78,25 @@ public class ArbolHeap {
              salir = true;
            }
        }
-       this.heap[posicion].equals(temp); 
+       this.heap[posicion] = temp; 
    }
    public boolean esVacio(){
        return this.ultimo == 0;
    }
+   public String toString() {
+        String res = "[";
+        int i = 1;
+          while(i <= this.ultimo){
+            if (i < this.ultimo) {
+                res = res + this.heap[i] + " ,";
+            } else {
+                res = res + this.heap[i] + "]";
+            }
+            
+            i++;
+        }
+        return res;
+    }
 
 }
 
