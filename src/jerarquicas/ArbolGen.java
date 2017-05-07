@@ -92,7 +92,7 @@ public class ArbolGen {
             }else{
                 NodoGen hijo = n.getEIzq();
                 while(hijo != null && res.equals(-1) ){
-                     res= nivelAux(hijo,elem,piso+1);
+                    res= nivelAux(hijo,elem,piso+1);
                     hijo = hijo.getHDer();
                 }
             }

@@ -28,8 +28,8 @@ public class TestArbolGen {
         b.insertar(5, 2);
        
         System.out.println(a.toString());
-        System.out.println(a.padre(3));
-        System.out.println(a.frontera());
+       
+        System.out.println(a.altura());
         /*System.out.println(a.pertenece(8));
         System.out.println(a.entreNiveles(1, 2).toString());
         System.out.println(a.frontera());
