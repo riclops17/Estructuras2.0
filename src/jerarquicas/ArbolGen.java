@@ -4,17 +4,15 @@
  * and open the template in the editor.
  */
 package jerarquicas;
-
-import lineales.dinamicas.ListaInt;
-
+import lineales.dinamicas.Lista;
 /**
  *
  * @author rickybauch
  */
-public class ArbolGenInt {
+public class ArbolGen {
     private NodoGen raiz;
     
-    public ArbolGenInt(){
+    public ArbolGen(){
         this.raiz = null;
     }
     public boolean insertar(int elem,int elemPadre){
@@ -32,10 +30,10 @@ public class ArbolGenInt {
         }
         return res;
     }
-    private NodoGen obtenerNodo(NodoGen n, int elem){
+    private NodoGen obtenerNodo(NodoGen n, Object elem){
         NodoGen res = null;
         if(n != null){
-            if(n.getElem() == elem){
+            if(n.getElem().equals(elem) ){
                 res = n;
             }else{
             NodoGen aux = n.getEIzq();
@@ -53,7 +51,7 @@ public class ArbolGenInt {
     private boolean perteneceAux(NodoGen n,int elem){
         boolean res= false;
         if(n != null){
-            if(n.getElem() == elem){
+            if(n.getElem().equals(elem) ){
                 res = true;
             }else{
                 NodoGen hijo = n.getEIzq();
@@ -65,17 +63,17 @@ public class ArbolGenInt {
         }
         return res;
     }
-    public int padre(int elem){
+    public Object padre(int elem){
         return padreAux(this.raiz,elem);
     }
-    private int padreAux(NodoGen n,int elem){
-        int res = -1;
+    private Object padreAux(NodoGen n,Object elem){
+        Object res = -1;
         if(n != null){
-            if(n.getEIzq() != null && n.getEIzq().getElem() == elem ){
+            if(n.getEIzq() != null && n.getEIzq().getElem().equals(elem) ){
                 res = n.getElem();
             }else{
                 NodoGen hijo = n.getEIzq();
-                while(hijo != null && res == -1){
+                while(hijo != null && res.equals(-1) ){
                     res = padreAux(hijo,elem);
                     hijo = hijo.getHDer();
                 }
@@ -83,17 +81,17 @@ public class ArbolGenInt {
         }
         return res;
     }
-    public int nivel(int elem){
+    public Object nivel(int elem){
         return nivelAux(this.raiz,elem,0);
     }
-    private int nivelAux(NodoGen n,int elem , int piso){
-        int res = -1;
+    private Object nivelAux(NodoGen n,Object elem , int piso){
+        Object res = -1;
         if(n != null){
             if(n.getElem() == elem){
                 res = piso;
             }else{
                 NodoGen hijo = n.getEIzq();
-                while(hijo != null && res == -1){
+                while(hijo != null && res.equals(-1) ){
                      res= nivelAux(hijo,elem,piso+1);
                     hijo = hijo.getHDer();
                 }
@@ -110,7 +108,7 @@ public class ArbolGenInt {
             res = 0;
         }else{
             NodoGen hijo = n.getEIzq();
-             res = alturaAux(hijo) +1;
+            res = alturaAux(hijo) +1;
             while(hijo != null && res == -1){
                 res = alturaAux(hijo) ;
                 hijo = hijo.getHDer();
@@ -119,12 +117,12 @@ public class ArbolGenInt {
         return res;
     }
             
-    public ListaInt listarPreorden(){
-        ListaInt l1 = new ListaInt();
+    public Lista listarPreorden(){
+        Lista l1 = new Lista();
         listarPreordenAux(this.raiz,l1);
         return l1;  
     }
-    private void listarPreordenAux(NodoGen n,ListaInt l1){
+    private void listarPreordenAux(NodoGen n,Lista l1){
         if(n != null){
             l1.insertar(n.getElem(), l1.longitud()+1);
             NodoGen aux = n.getEIzq();
@@ -135,12 +133,12 @@ public class ArbolGenInt {
             }
         }
     }
-     public ListaInt listarInorden(){
-        ListaInt l1 = new ListaInt();
+     public Lista listarInorden(){
+        Lista l1 = new Lista();
         listarInordenAux(this.raiz,l1);
         return l1;
     }
-    private void listarInordenAux(NodoGen n , ListaInt l1){
+    private void listarInordenAux(NodoGen n , Lista l1){
         if(n != null){
             NodoGen aux = n.getEIzq();
             if(aux != null){
@@ -155,12 +153,12 @@ public class ArbolGenInt {
     }
     
     
-    public ListaInt listarPosorden(){
-        ListaInt l1 = new ListaInt();
+    public Lista listarPosorden(){
+        Lista l1 = new Lista();
         listarPosordenAux(this.raiz,l1);
         return l1;
     }
-    private void listarPosordenAux(NodoGen n,ListaInt l1){
+    private void listarPosordenAux(NodoGen n,Lista l1){
         if(n != null){
             NodoGen hijo = n.getEIzq();
             while(hijo != null){
@@ -190,12 +188,12 @@ public class ArbolGenInt {
         }
         return s;
     }
-    public ListaInt frontera(){
-        ListaInt l1 = new ListaInt();
+    public Lista frontera(){
+        Lista l1 = new Lista();
         fronteraAux(this.raiz,l1);
         return l1;
     }
-    private void fronteraAux(NodoGen n,ListaInt l1){
+    private void fronteraAux(NodoGen n,Lista l1){
         if(n != null){
             if(n.getEIzq() == null ){
                 l1.insertar(n.getElem(), l1.longitud() +1);
@@ -208,12 +206,12 @@ public class ArbolGenInt {
             }
         }
     }
-    public ListaInt entreNiveles(int min , int max ){
-        ListaInt l1 = new ListaInt();
+    public Lista entreNiveles(int min , int max ){
+        Lista l1 = new Lista();
         entreNivelesAux(this.raiz,min,max,l1,0);
         return l1;
     }
-    private void entreNivelesAux(NodoGen n, int min,int max,ListaInt l1,int piso){
+    private void entreNivelesAux(NodoGen n, int min,int max,Lista l1,int piso){
         if( n!= null){
             if(min <= piso && max >= piso){
                 l1.insertar(n.getElem(), l1.longitud() +1);
@@ -232,10 +230,10 @@ public class ArbolGenInt {
              
          }
      }
-    private NodoGen obtenerNodoPadre(NodoGen n , int elem){
+    private NodoGen obtenerNodoPadre(NodoGen n , Object elem){
         NodoGen res = null;
         if(n != null){
-            if(n.getEIzq() != null && n.getEIzq().getElem() == elem){
+            if(n.getEIzq() != null && n.getEIzq().getElem().equals(elem)){
                 res = n;
             }else{
                 NodoGen hijo = n.getEIzq();
@@ -247,14 +245,14 @@ public class ArbolGenInt {
         }
         return res;
     }
-    public ListaInt listarAncestros(int elem){
-        ListaInt l1 = new ListaInt();
+    public Lista listarAncestros(int elem){
+        Lista l1 = new Lista();
         listarAncestrosAux(this.raiz,l1, elem);
         return l1;
     }
-    private void listarAncestrosAux(NodoGen n,ListaInt l1 , int elem){
+    private void listarAncestrosAux(NodoGen n,Lista l1 , int elem){
         if(n != null){
-            if(n.getElem() == elem){
+            if(n.getElem().equals(elem)){
                 l1.insertar(n.getElem(), l1.longitud() +1);
             }else{
                 NodoGen hijo = n.getEIzq();
@@ -269,12 +267,12 @@ public class ArbolGenInt {
         }
     }
     
-    public ListaInt listarCaminoMasLargo(){
-       ListaInt visitados = new ListaInt();
-       ListaInt caminoLargo = new ListaInt();
+    public Lista listarCaminoMasLargo(){
+       Lista visitados = new Lista();
+       Lista caminoLargo = new Lista();
         return listarCaminoMasLargoAux(this.raiz,visitados,caminoLargo);
     }
-    private ListaInt listarCaminoMasLargoAux(NodoGen n, ListaInt visitados,ListaInt l1){
+    private Lista listarCaminoMasLargoAux(NodoGen n, Lista visitados,Lista l1){
         if(n != null){
             visitados.insertar(n.getElem(), visitados.longitud()+1);
             if(n.getEIzq() == null && visitados.longitud() > l1.longitud()){
@@ -291,8 +289,8 @@ public class ArbolGenInt {
         }
         return l1;
     }
-    public ArbolGenInt clonar(){
-        ArbolGenInt c = new ArbolGenInt();
+    public ArbolGen clonar(){
+        ArbolGen c = new ArbolGen();
         c.raiz = clonarAux(this.raiz);
         return c;
     }
@@ -306,10 +304,10 @@ public class ArbolGenInt {
        }
         return nodoClon;
     }
-    public boolean verificarPatron(ListaInt l1){
+    public boolean verificarPatron(Lista l1){
         return verificarPatronAux(this.raiz,l1);
     }
-    private boolean verificarPatronAux(NodoGen n ,ListaInt l1){
+    private boolean verificarPatronAux(NodoGen n ,Lista l1){
         boolean res = true;
        if (n != null) {
             NodoGen hijo = n.getEIzq();
@@ -329,13 +327,13 @@ public class ArbolGenInt {
         }
        return res;
     }
-    public boolean equals(ArbolGenInt otro){
+    public boolean equals(ArbolGen otro){
         return equalsAux(this.raiz,otro.raiz);
     }
     private boolean equalsAux(NodoGen n , NodoGen n2){
         boolean res = false;
         if(n!= null && n2 != null){
-            if(n.getEIzq()== null && n2.getEIzq() == null && n.getElem() == n2.getElem()){
+            if(n.getEIzq()== null && n2.getEIzq() == null && n.getElem().equals(n2.getElem())){
                 res = true;
             }else{
                 NodoGen hijo =  n.getEIzq();

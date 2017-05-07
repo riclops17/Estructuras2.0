@@ -29,7 +29,7 @@ public class TestArbolbin {
         a.insertar(2, 1, 'I');
         a.insertar(3, 1, 'D');
         a.insertar(4, 2, 'I');
-        a.insertar(7, 2, 'D');
+        a.insertar(5, 2, 'D');
         a.insertar(6, 3, 'I');
         a.insertar(7, 3, 'D');
         

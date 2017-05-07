@@ -4,21 +4,22 @@
  * and open the template in the editor.
  */
 package test.jerarquicas;
-import jerarquicas.ArbolGenInt;
+import jerarquicas.ArbolGen;
 /**
  *
  * @author rickybauch
  */
 public class TestArbolGen {
     public static void main(String[] args) {
-        ArbolGenInt a = new ArbolGenInt();
-        ArbolGenInt b = new ArbolGenInt();
-        ArbolGenInt c = new ArbolGenInt();
+        ArbolGen a = new ArbolGen();
+        ArbolGen b = new ArbolGen();
+        ArbolGen c = new ArbolGen();
         a.insertar(1, 1);
         a.insertar(2, 1);
         a.insertar(3, 1);
         a.insertar(4, 1);
         a.insertar(5, 2);
+        a.insertar(3, 5);
         
         b.insertar(1, 1);
         b.insertar(2, 1);
@@ -27,7 +28,8 @@ public class TestArbolGen {
         b.insertar(5, 2);
        
         System.out.println(a.toString());
-        
+        System.out.println(a.padre(3));
+        System.out.println(a.frontera());
         /*System.out.println(a.pertenece(8));
         System.out.println(a.entreNiveles(1, 2).toString());
         System.out.println(a.frontera());
@@ -38,9 +40,7 @@ public class TestArbolGen {
         //a.eliminarEHijoIzq(4);
          
    
-        System.out.println("");
-        System.out.println(b.toString());
-        System.out.println(a.equals(b));
+        
         
     }
 }
