@@ -15,7 +15,7 @@ public class ArbolGen {
     public ArbolGen(){
         this.raiz = null;
     }
-    public boolean insertar(Object elem,int elemPadre){
+    public boolean insertar(Object elem,Object elemPadre){
         boolean res = true;
         if(this.raiz == null){
             this.raiz = new NodoGen(elem);
