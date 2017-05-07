@@ -64,6 +64,21 @@ public class ArbolBB {
             l1.insertar(n.getElem(), l1.longitud() +1);
             listarAux(n.getDer(),l1);
         }
+        
+    }
+    public ListaInt listarRango(int elemMinimo , int elemMaximo){
+        ListaInt l1 = new ListaInt();
+        listarRangoAux(this.raiz,elemMinimo,elemMaximo,l1);
+        return l1;
+    }
+    private void listarRangoAux(NodoArbol n ,int elemMinimo, int elemMaximo,ListaInt l1){
+        if(n != null){
+            listarRangoAux(n.getIzq(), elemMinimo,elemMaximo ,l1);
+            if(n.getElem() >= elemMinimo  && n.getElem() <= elemMaximo ){
+                l1.insertar(n.getElem(), l1.longitud() +1);
+            }
+            listarRangoAux(n.getDer() ,elemMinimo,elemMaximo,l1);
+        }
     }
     public String toString() {
         String s = "";
@@ -99,6 +114,40 @@ public class ArbolBB {
 
         }
         return s;
+    }
+    public int minimoElem(){
+      return minimoElemAux(this.raiz);       
+    }
+    private int minimoElemAux(NodoArbol n){
+        int res;
+        if(n != null){ 
+        while(n.getIzq() != null){
+            n = n.getIzq();
+        }
+       }
+       return  n.getElem();
+    }
+    public int maximoElem(){
+     return maximoElemAux(this.raiz);       
+    }
+    private int maximoElemAux(NodoArbol n){
+        if(n != null){ 
+        while(n.getDer() != null){
+            n = n.getDer(); 
+        }
+      }
+       return  n.getElem();
+    } 
+    public void eliminarMinimoElem(){
+        eliminarMinimoElemAux(this.raiz);
+    }
+    private void eliminarMinimoElemAux(NodoArbol n){
+        if(n != null){
+            while(n.getIzq().getIzq() != null){
+                n = n.getIzq();
+            }
+            n.setIzq(null);
+        }
     }
     
     
