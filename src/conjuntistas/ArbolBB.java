@@ -179,6 +179,13 @@ public class ArbolBB {
                             n.setIzq(n.getIzq().getDer());
                           }else {
                             if (n.getIzq().getIzq() != null && n.getIzq().getDer() != null) {
+                                if(n.getIzq().getIzq().getIzq() == null && n.getIzq().getDer().getDer() == null){
+                                  NodoArbol hijoIcand = n.getIzq().getIzq();
+                                  NodoArbol hijoDcand = n.getIzq().getDer();
+                                  n.setIzq(hijoDcand);
+                                  hijoDcand.setIzq(hijoIcand);
+                                }else{
+                            
                                 NodoArbol candidato = n.getIzq().getDer();
                                 NodoArbol hijoIzqOriginal = n.getIzq().getIzq();
                                 NodoArbol hijoDerOriginal = n.getIzq().getDer();
@@ -201,7 +208,7 @@ public class ArbolBB {
             }
         }
     } 
-
+  }
     
 
     private NodoArbol obtenerNodoPadre(NodoArbol n, int elem) {

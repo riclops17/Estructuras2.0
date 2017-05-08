@@ -12,20 +12,24 @@ import conjuntistas.ArbolBB;
 public class TestArbolBB {
     public static void main(String[] args) {
        ArbolBB a = new ArbolBB();
-       a.insertar(45);
-       a.insertar(96);
-       a.insertar(55);
-       a.insertar(34);
-       a.insertar(65);
-       a.insertar(73);
-       a.insertar(13);
+       a.insertar(10);
+       a.insertar(5);
+       a.insertar(2);
+       a.insertar(8);
+       a.insertar(1);
+       a.insertar(4);
+       a.insertar(6);
+       a.insertar(9);
+       a.insertar(7);
         System.out.println(a.toString());
-        System.out.println(a.listar());
+       /* System.out.println(a.listar());
         System.out.println(a.listarRango(13, 50));
         System.out.println(a.minimoElem());
-        System.out.println(a.maximoElem());
-        a.eliminarMinimoElem();
+        System.out.println(a.maximoElem());*/
+        //a.eliminarMinimoElem();
+        a.eliminar(2);
         System.out.println(a.toString());
+       
     }
     
 }

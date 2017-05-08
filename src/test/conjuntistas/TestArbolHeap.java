@@ -21,7 +21,7 @@ public class TestArbolHeap {
        a.insertar(8);
        a.eliminarCima();
        
-        System.out.println(a.toString());
+       System.out.println(a.toString());
        
     }
 }
