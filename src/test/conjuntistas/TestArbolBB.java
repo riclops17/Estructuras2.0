@@ -21,14 +21,18 @@ public class TestArbolBB {
        a.insertar(6);
        a.insertar(9);
        a.insertar(7);
+       a.insertar(13);
+       a.insertar(11);
+       a.insertar(14);
+       a.insertar(12);
         System.out.println(a.toString());
        /* System.out.println(a.listar());
         System.out.println(a.listarRango(13, 50));
         System.out.println(a.minimoElem());
         System.out.println(a.maximoElem());*/
         //a.eliminarMinimoElem();
-        a.eliminar(2);
-        System.out.println(a.toString());
+        //a.eliminar(11);
+        System.out.println(a.pertenece(14));
        
     }
     

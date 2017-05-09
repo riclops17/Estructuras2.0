@@ -157,11 +157,15 @@ public class ArbolBB {
     }
 
     private void eliminarMinimoElemAux(NodoArbol n) {
+        NodoArbol aux = null;
         if (n != null) {
             while (n.getIzq().getIzq() != null) {
                 n = n.getIzq();
             }
-            n.setIzq(null);
+            if(n.getIzq().getDer() != null){
+                aux = n.getIzq().getDer();
+            }
+            n.setIzq(aux);
         }
     }
 
@@ -183,14 +187,14 @@ public class ArbolBB {
                     }
                 // caso 3
                 if (n.getIzq().getIzq() != null && n.getIzq().getDer() != null) {
-                               
+                  // caso particular  1           
                 if(n.getIzq().getIzq().getIzq() == null && n.getIzq().getDer().getDer() == null){
                      NodoArbol hijoIcand = n.getIzq().getIzq();
                      NodoArbol hijoDcand = n.getIzq().getDer();
                      n.setIzq(hijoDcand);
                       hijoDcand.setIzq(hijoIcand);
                     }else{
-                         
+                     // caso particular 2   
                      NodoArbol candidato = n.getIzq().getDer();
                      NodoArbol hijoIzqOriginal = n.getIzq().getIzq();
                      NodoArbol hijoDerOriginal = n.getIzq().getDer();
@@ -226,6 +230,7 @@ public class ArbolBB {
            }
            // caso 3
            if(n.getDer().getIzq() != null && n.getDer().getIzq() != null){
+               // caso particular 1
                 if(n.getDer().getIzq().getIzq() == null && n.getDer().getDer().getDer() == null){
                     NodoArbol hijoICandidato = n.getDer().getIzq();
                     NodoArbol hijoDCandidato = n.getDer().getDer();
@@ -233,6 +238,7 @@ public class ArbolBB {
                     hijoDCandidato.setIzq(hijoICandidato);
                     
                 }else{
+                // caso particular 2
                     NodoArbol candidato = n.getDer().getDer();
                     NodoArbol hijoIzqOriginal = n.getDer().getIzq();
                     NodoArbol hijoDerOriginal = n.getDer().getDer();
@@ -271,6 +277,36 @@ public class ArbolBB {
             }
         }
         return res;
+    }
+    public boolean pertenece(int elem){
+        boolean res = false;
+        NodoArbol aux = this.raiz;
+        while(aux!= null && res == false){
+            if(aux.getElem() == elem){
+                res = true;
+            }else{
+                if(aux.getElem() < elem){
+                    aux = aux.getDer();
+                }else{
+                    aux = aux.getIzq();
+                }
+            }
+        }
+        return res;
+    }
+    public void listarRango2(int elemMinimo , int elemMaximo){
+        ListaInt l1 = new ListaInt();
+        NodoArbol aux = this.raiz;
+        while(aux != null){
+            if(aux.getElem() >= elemMinimo && aux.getElem() <= elemMaximo){
+                l1.insertar(aux.getElem(), l1.longitud()+1);
+            }else{
+                if(aux.getElem() < elemMinimo){
+                    aux = aux.getIzq();
+                }
+                
+            }
+        }
     }
 
 }
