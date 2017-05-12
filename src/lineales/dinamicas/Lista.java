@@ -124,7 +124,7 @@ public class Lista {
             s = "[";
             while (aux != null) {
                 //agrega el elemento al String
-                s += aux.getElem();
+                s += aux.getElem().toString();
                 //avanza al siguiente nodo
                 aux = aux.getEnlace();
                 if (aux != null) {

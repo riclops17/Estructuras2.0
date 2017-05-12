@@ -11,10 +11,10 @@ package conjuntistas;
  */
 public class NodoAVL {
     private int elem;
-    private NodoArbol izq;
-    private NodoArbol der;
+    private NodoAVL izq;
+    private NodoAVL der;
     private int altura;
-    public NodoAVL(int elem1, NodoArbol izq1 ,NodoArbol der1){
+    public NodoAVL(int elem1, NodoAVL izq1 ,NodoAVL der1){
         this.elem = elem1;
         this.izq = izq1;
         this.der = der1;
@@ -29,19 +29,25 @@ public class NodoAVL {
     public int getElem(){
         return this.elem;
     }
-    public NodoArbol getIzq(){
+    public int getAltura(){
+        return this.altura;
+    }
+    public NodoAVL getIzq(){
         return this.izq;
     }
-    public NodoArbol getDer(){
+    public NodoAVL getDer(){
         return this.der;
+    }
+    public void setAltura(int alt1){
+        this.altura = alt1;
     }
     public void setElem(int elem1 ){
         this.elem = elem1;
     }
-    public void setIzq(NodoArbol izq1){
+    public void setIzq(NodoAVL izq1){
         this.izq = izq1;
     }
-    public void setDer(NodoArbol der1){
+    public void setDer(NodoAVL der1){
         this.der = der1;
     }
 }

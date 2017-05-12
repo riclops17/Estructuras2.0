@@ -162,7 +162,7 @@ public class ArbolBB {
             while (n.getIzq().getIzq() != null) {
                 n = n.getIzq();
             }
-            if(n.getIzq().getDer() != null){
+            if (n.getIzq().getDer() != null) {
                 aux = n.getIzq().getDer();
             }
             n.setIzq(aux);
@@ -171,98 +171,105 @@ public class ArbolBB {
 
     public void eliminar(int elem) {
         NodoArbol n = obtenerNodoPadre(this.raiz, elem);
-         if (n != null) {
-             // si esta en el izquierdo
-            if (n.getIzq().getElem() == elem) {
+        if (n != null) {
+            // si esta en el izquierdo
+            if (n.getIzq() != null && n.getIzq().getElem() == elem) {
                 //caso1
                 if (n.getIzq().getIzq() == null && n.getIzq().getDer() == null) {
                     n.setIzq(null);
-                } 
-                // caso 2 
-                if (n.getIzq().getIzq() != null && n.getIzq().getDer() == null) {
+                } else {
+                    if (n.getIzq().getIzq() != null && n.getIzq().getDer() == null) {
                         n.setIzq(n.getIzq().getIzq());
-                    }
-                if (n.getIzq().getDer() != null && n.getIzq().getIzq() == null) {
-                    n.setIzq(n.getIzq().getDer());
-                    }
-                // caso 3
-                if (n.getIzq().getIzq() != null && n.getIzq().getDer() != null) {
-                  // caso particular  1           
-                if(n.getIzq().getIzq().getIzq() == null && n.getIzq().getDer().getDer() == null){
-                     NodoArbol hijoIcand = n.getIzq().getIzq();
-                     NodoArbol hijoDcand = n.getIzq().getDer();
-                     n.setIzq(hijoDcand);
-                      hijoDcand.setIzq(hijoIcand);
-                    }else{
-                     // caso particular 2   
-                     NodoArbol candidato = n.getIzq().getDer();
-                     NodoArbol hijoIzqOriginal = n.getIzq().getIzq();
-                     NodoArbol hijoDerOriginal = n.getIzq().getDer();
-                     NodoArbol hijoDerCandidato = null;
-                     while (candidato.getIzq() != null) {
-                        candidato = candidato.getIzq();
-                         }
-                         if (candidato.getDer() != null) {
-                            hijoDerCandidato = candidato.getDer();
-                          }
-                            n.setIzq(candidato);
-                            candidato.setIzq(hijoIzqOriginal);
-                            candidato.setDer(hijoDerOriginal);
-                            hijoDerOriginal.setIzq(hijoDerCandidato);
+                    } else {
+                        if (n.getIzq().getDer() != null && n.getIzq().getIzq() == null) {
+                            n.setIzq(n.getIzq().getDer());
+                        } else {
+                            if (n.getIzq().getDer() != null && n.getIzq().getIzq() == null) {
+                                n.setIzq(n.getIzq().getDer());
+                            } else {
+                                if (n.getIzq().getIzq() != null && n.getIzq().getDer() != null) {
+                                    // caso particular  1           
+                                    if (n.getIzq().getIzq().getIzq() == null && n.getIzq().getDer().getDer() == null) {
+                                        NodoArbol hijoIcand = n.getIzq().getIzq();
+                                        NodoArbol hijoDcand = n.getIzq().getDer();
+                                        n.setIzq(hijoDcand);
+                                        hijoDcand.setIzq(hijoIcand);
+                                    } else {
+                                        // caso particular 2   
+                                        NodoArbol candidato = n.getIzq().getDer();
+                                        NodoArbol hijoIzqOriginal = n.getIzq().getIzq();
+                                        NodoArbol hijoDerOriginal = n.getIzq().getDer();
+                                        NodoArbol hijoDerCandidato = null;
+                                        while (candidato.getIzq() != null) {
+                                            candidato = candidato.getIzq();
+                                        }
+                                        if (candidato.getDer() != null) {
+                                            hijoDerCandidato = candidato.getDer();
+                                        }
+                                        n.setIzq(candidato);
+                                        candidato.setIzq(hijoIzqOriginal);
+                                        candidato.setDer(hijoDerOriginal);
+                                        hijoDerOriginal.setIzq(hijoDerCandidato);
+                                    }
+                                }
                             }
                         }
+                    }
+                    // caso 2 
 
-                    }
-                
-            
-         // si esta en el derecho
-        if(n.getDer().getElem() == elem){
-           // caso 1
-           if(n.getDer().getIzq() == null && n.getDer().getIzq() == null ){
-               n.setDer(null);
-           }
-           // caso 2
-           if(n.getDer().getIzq() != null && n.getDer().getDer() == null){
-               n.setDer(n.getDer().getIzq());
-           }
-           if(n.getDer().getIzq() == null && n.getDer().getDer() != null){
-               n.setDer(n.getDer().getDer());
-           }
-           // caso 3
-           if(n.getDer().getIzq() != null && n.getDer().getIzq() != null){
-               // caso particular 1
-                if(n.getDer().getIzq().getIzq() == null && n.getDer().getDer().getDer() == null){
-                    NodoArbol hijoICandidato = n.getDer().getIzq();
-                    NodoArbol hijoDCandidato = n.getDer().getDer();
-                    n.setDer(hijoDCandidato);
-                    hijoDCandidato.setIzq(hijoICandidato);
-                    
-                }else{
-                // caso particular 2
-                    NodoArbol candidato = n.getDer().getDer();
-                    NodoArbol hijoIzqOriginal = n.getDer().getIzq();
-                    NodoArbol hijoDerOriginal = n.getDer().getDer();
-                    NodoArbol hijoDerCandidato = null;
-                    while(candidato.getIzq() != null){
-                        candidato = candidato.getIzq();
-                    }
-                    if (candidato.getDer() != null) {
-                     hijoDerCandidato = candidato.getDer();
-                    }
-                    n.setDer(candidato);
-                    candidato.setIzq(hijoIzqOriginal);
-                    candidato.setDer(hijoDerOriginal);
-                    hijoDerOriginal.setIzq(hijoDerCandidato);
+                    // caso 3
                 }
-                   
+
+            } else {
+                // si esta en el derecho
+                if (n.getDer() != null && n.getDer().getElem() == elem) {
+                    // caso 1
+                    if (n.getDer().getIzq() == null && n.getDer().getIzq() == null) {
+                        n.setDer(null);
+                    } else {
+                        if (n.getDer().getIzq() != null && n.getDer().getDer() == null) {
+                            n.setDer(n.getDer().getIzq());
+                        } else {
+                            if (n.getDer().getIzq() == null && n.getDer().getDer() != null) {
+                                n.setDer(n.getDer().getDer());
+                            } else {
+                                if (n.getDer().getIzq() != null && n.getDer().getIzq() != null) {
+                                    // caso particular 1
+                                    if (n.getDer().getIzq().getIzq() == null && n.getDer().getDer().getDer() == null) {
+                                        NodoArbol hijoICandidato = n.getDer().getIzq();
+                                        NodoArbol hijoDCandidato = n.getDer().getDer();
+                                        n.setDer(hijoDCandidato);
+                                        hijoDCandidato.setIzq(hijoICandidato);
+
+                                    } else {
+                                        // caso particular 2
+                                        NodoArbol candidato = n.getDer().getDer();
+                                        NodoArbol hijoIzqOriginal = n.getDer().getIzq();
+                                        NodoArbol hijoDerOriginal = n.getDer().getDer();
+                                        NodoArbol hijoDerCandidato = null;
+                                        while (candidato.getIzq() != null) {
+                                            candidato = candidato.getIzq();
+                                        }
+                                        if (candidato.getDer() != null) {
+                                            hijoDerCandidato = candidato.getDer();
+                                        }
+                                        n.setDer(candidato);
+                                        candidato.setIzq(hijoIzqOriginal);
+                                        candidato.setDer(hijoDerOriginal);
+                                        hijoDerOriginal.setIzq(hijoDerCandidato);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    // caso 2
+
+                    // caso 3
+                }
             }
-            
-            
-        } 
+        }
     }
- }
-    
-    
 
     private NodoArbol obtenerNodoPadre(NodoArbol n, int elem) {
         NodoArbol res = null;
@@ -278,33 +285,35 @@ public class ArbolBB {
         }
         return res;
     }
-    public boolean pertenece(int elem){
+
+    public boolean pertenece(int elem) {
         boolean res = false;
         NodoArbol aux = this.raiz;
-        while(aux!= null && res == false){
-            if(aux.getElem() == elem){
+        while (aux != null && res == false) {
+            if (aux.getElem() == elem) {
                 res = true;
-            }else{
-                if(aux.getElem() < elem){
+            } else {
+                if (aux.getElem() < elem) {
                     aux = aux.getDer();
-                }else{
+                } else {
                     aux = aux.getIzq();
                 }
             }
         }
         return res;
     }
-    public void listarRango2(int elemMinimo , int elemMaximo){
+
+    public void listarRango2(int elemMinimo, int elemMaximo) {
         ListaInt l1 = new ListaInt();
         NodoArbol aux = this.raiz;
-        while(aux != null){
-            if(aux.getElem() >= elemMinimo && aux.getElem() <= elemMaximo){
-                l1.insertar(aux.getElem(), l1.longitud()+1);
-            }else{
-                if(aux.getElem() < elemMinimo){
+        while (aux != null) {
+            if (aux.getElem() >= elemMinimo && aux.getElem() <= elemMaximo) {
+                l1.insertar(aux.getElem(), l1.longitud() + 1);
+            } else {
+                if (aux.getElem() < elemMinimo) {
                     aux = aux.getIzq();
                 }
-                
+
             }
         }
     }

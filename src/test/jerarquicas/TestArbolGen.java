@@ -17,9 +17,9 @@ public class TestArbolGen {
         a.insertar(1, 1);
         a.insertar(2, 1);
         a.insertar(3, 1);
-        a.insertar(4, 1);
+        a.insertar('b', 1);
         a.insertar(5, 2);
-        a.insertar(3, 5);
+        a.insertar('a', 5);
         
         b.insertar(1, 1);
         b.insertar(2, 1);
@@ -29,7 +29,7 @@ public class TestArbolGen {
        
         System.out.println(a.toString());
        
-        System.out.println(a.altura());
+        System.out.println();
         /*System.out.println(a.pertenece(8));
         System.out.println(a.entreNiveles(1, 2).toString());
         System.out.println(a.frontera());

@@ -20,19 +20,22 @@ public class TestArbolBB {
        a.insertar(4);
        a.insertar(6);
        a.insertar(9);
-       a.insertar(7);
-       a.insertar(13);
+       a.insertar(12);
        a.insertar(11);
        a.insertar(14);
-       a.insertar(12);
+       a.insertar(20);
+       a.insertar(21);
         System.out.println(a.toString());
+        a.eliminar(8);
+        
+        
        /* System.out.println(a.listar());
         System.out.println(a.listarRango(13, 50));
         System.out.println(a.minimoElem());
         System.out.println(a.maximoElem());*/
         //a.eliminarMinimoElem();
         //a.eliminar(11);
-        System.out.println(a.pertenece(14));
+        System.out.println(a.toString());
        
     }
     
