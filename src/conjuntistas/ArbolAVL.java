@@ -23,8 +23,8 @@ public class ArbolAVL {
         h.setIzq(r);
         r.setDer(temp);
         // actualizo las alturas
-        r.setAltura(Math.max(r.getIzq().getAltura(), r.getDer().getAltura())+1);
-        h.setAltura(Math.max(h.getIzq().getAltura(), h.getDer().getAltura())+1);
+        r.recalcularAltura();
+        h.recalcularAltura();
         
         return h;  
     }
@@ -35,10 +35,12 @@ public class ArbolAVL {
         temp = r.getDer();
         h.setDer(r);
         r.setIzq(temp);
-        r.setAltura(Math.max(r.getIzq().getAltura(), r.getDer().getAltura())+1);
+        r.recalcularAltura();
+        h.recalcularAltura();
         
         return h;
     }
+   
     public boolean insertar(int elem) {
         boolean res = true;
         if (this.raiz == null) {
@@ -93,7 +95,7 @@ public class ArbolAVL {
     }
 
     private String stringAux(NodoAVL n) {
-        String s = "" + n.getElem();
+        String s = "["+ n.getAltura()+"] " + n.getElem();
         if (n.getIzq() != null) {
             s = s + " - HI: " + n.getIzq().getElem();
 

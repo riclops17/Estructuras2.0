@@ -245,7 +245,7 @@ public class ArbolGen {
         }
         return res;
     }
-    public Lista listarAncestros(int elem){
+    public Lista ancestros(int elem){
         Lista l1 = new Lista();
         listarAncestrosAux(this.raiz,l1, elem);
         return l1;
