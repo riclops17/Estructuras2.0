@@ -50,6 +50,9 @@ public class NodoAVL {
     public void setDer(NodoAVL der1){
         this.der = der1;
     }
+    public void actualizarAltura(){
+        this.altura++;
+    }
     public void recalcularAltura(){
        this.setAltura(Math.max(alturaAux(this.izq), alturaAux(this.der))+1);
     }
