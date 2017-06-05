@@ -201,8 +201,70 @@ public class ArbolAVL {
         }
         return s;
     }
-     private NodoArbol obtenerNodoPadre(NodoArbol n, int elem) {
-        NodoArbol res = null;
+    public void eliminar(int elem) {
+        if (this.raiz.getElem() == elem) {
+            if (this.raiz.getIzq() == null && this.raiz.getDer() == null) {
+                this.raiz = null;
+            } else {
+                if (this.raiz.getDer() == null) {
+                    this.raiz = this.raiz.getIzq();
+                } else {
+                    if (this.raiz.getIzq() == null) {
+                        this.raiz = this.raiz.getDer();
+                    } else {
+                        if (this.raiz.getIzq() != null && this.raiz.getDer() != null) {
+                            if (this.raiz.getDer().getIzq() == null) {
+                                NodoAVL aux = this.raiz.getIzq();
+                                this.raiz = this.raiz.getDer();
+                                this.raiz.setIzq(aux);
+                            } else {
+                                NodoAVL aux2 = this.raiz.getDer();
+                                NodoAVL aux3 = this.raiz.getDer();
+                                NodoAVL auxHijoIzq = this.raiz.getIzq();
+                                NodoAVL auxHijoIzqDer = null;
+                                while (aux2.getIzq() != null) {
+                                    aux2 = aux2.getIzq();
+                                }
+                                if (aux2.getDer() != null) {
+                                    auxHijoIzqDer = aux2.getDer();
+                                }
+                                this.raiz = aux2;
+                                aux2.setDer(aux3);
+                                aux2.setIzq(auxHijoIzq);
+                                aux2.getDer().setIzq(auxHijoIzqDer);
+
+                            }
+                        }
+
+                    }
+                }
+
+            }
+          
+           
+        } else {
+            NodoAVL n = obtenerNodoPadre(this.raiz, elem);
+            if (n != null) {
+                if (n.getIzq() != null && n.getIzq().getElem() == elem) {
+                    eliminarPorLaIzquierda(n);
+                } else {
+                    if (n.getDer() != null && n.getDer().getElem() == elem) {
+                        eliminarPorLaDerecha(n);
+                    }
+                }
+                
+               
+            }
+         
+                  
+         }
+        
+        
+    }
+    
+    
+     private NodoAVL obtenerNodoPadre(NodoAVL n, int elem) {
+        NodoAVL res = null;
         if (n != null) {
             if (n.getIzq() != null && n.getIzq().getElem() == elem || n.getDer() != null && n.getDer().getElem() == elem) {
                 res = n;
@@ -215,4 +277,104 @@ public class ArbolAVL {
         }
         return res;
     }
+     private void eliminarPorLaIzquierda(NodoAVL n) {
+        if (n != null) {
+            // si esta en el izquierda
+            //caso1
+            if (n.getIzq().getIzq() == null && n.getIzq().getDer() == null) {
+                n.setIzq(null);
+            } else {
+                if (n.getIzq().getIzq() != null && n.getIzq().getDer() == null) {
+                    n.setIzq(n.getIzq().getIzq());
+                } else {
+                    if (n.getIzq().getDer() != null && n.getIzq().getIzq() == null) {
+                        n.setIzq(n.getIzq().getDer());
+                    } else {
+                        if (n.getIzq().getDer() != null && n.getIzq().getIzq() == null) {
+                            n.setIzq(n.getIzq().getDer());
+                        } else {
+                            if (n.getIzq().getIzq() != null && n.getIzq().getDer() != null) {
+                                // caso particular  1           
+                                if (n.getIzq().getIzq().getIzq() == null && n.getIzq().getDer().getDer() == null) {
+                                    NodoAVL hijoIcand = n.getIzq().getIzq();
+                                    NodoAVL hijoDcand = n.getIzq().getDer();
+                                    n.setIzq(hijoDcand);
+                                    hijoDcand.setIzq(hijoIcand);
+                                } else {
+                                    // caso particular 2   
+                                    NodoAVL candidato = n.getIzq().getDer();
+                                    NodoAVL hijoIzqOriginal = n.getIzq().getIzq();
+                                    NodoAVL hijoDerOriginal = n.getIzq().getDer();
+                                    NodoAVL hijoDerCandidato = null;
+                                    while (candidato.getIzq() != null) {
+                                        candidato = candidato.getIzq();
+                                    }
+                                    if (candidato.getDer() != null) {
+                                        hijoDerCandidato = candidato.getDer();
+                                    }
+                                    n.setIzq(candidato);
+                                    candidato.setIzq(hijoIzqOriginal);
+                                    candidato.setDer(hijoDerOriginal);
+                                    hijoDerOriginal.setIzq(hijoDerCandidato);
+                                }
+                            }
+                        }
+                    }
+                }
+                // caso 2 
+
+                // caso 3
+            }
+
+        }
+    }
+       private void eliminarPorLaDerecha(NodoAVL n) {
+        if (n != null) {
+            if (n.getDer().getIzq() == null && n.getDer().getDer() == null) {
+                n.setDer(null);
+            } else {
+                //caso2
+                if (n.getDer().getIzq() != null && n.getDer().getDer() == null) {
+                    n.setDer(n.getDer().getIzq());
+                } else {
+                    if (n.getDer().getIzq() == null && n.getDer().getDer() != null) {
+                        n.setDer(n.getDer().getDer());
+                    } else {
+                        if (n.getDer().getIzq() != null && n.getDer().getDer() != null) {
+                            // caso particular 1
+                            if (n.getDer().getDer().getIzq() == null && n.getDer().getDer().getDer() == null) {
+                                NodoAVL hijoICandidato = n.getDer().getIzq();
+                                NodoAVL hijoDCandidato = n.getDer().getDer();
+                                n.setDer(hijoDCandidato);
+                                hijoDCandidato.setIzq(hijoICandidato);
+
+                            } else {
+                                // caso particular 2
+                                NodoAVL candidato = n.getDer().getDer();
+                                NodoAVL hijoIzqOriginal = n.getDer().getIzq();
+                                NodoAVL hijoDerOriginal = n.getDer().getDer();
+                                NodoAVL hijoDerCandidato = null;
+                                while (candidato.getIzq() != null) {
+                                    candidato = candidato.getIzq();
+                                }
+                                if (candidato.getDer() != null) {
+                                    hijoDerCandidato = candidato.getDer();
+                                }
+                                n.setDer(candidato);
+                                candidato.setIzq(hijoIzqOriginal);
+                                candidato.setDer(hijoDerOriginal);
+                                hijoDerOriginal.setIzq(hijoDerCandidato);
+                            }
+
+                        }
+                    }
+                }
+            }
+            // caso 2
+
+            // caso 3
+        }
+    }
 }
+     
+

@@ -12,14 +12,20 @@ import conjuntistas.ArbolHeap;
 public class TestArbolHeap {
     public static void main(String[] args) {
        ArbolHeap a = new ArbolHeap();
+       a.insertar(1);
+       a.insertar(2);
+       a.insertar(5);
+       a.insertar(9);
+       a.insertar(3);
+       a.insertar(6);
+       a.insertar(7);
        a.insertar(10);
-       a.insertar(12);
-       a.insertar(15);
-       a.insertar(21);
-       a.insertar(45);
-       a.insertar(19);
+       a.insertar(16);
        a.insertar(8);
-       a.eliminarCima();
+       a.insertar(13);
+       a.insertar(14);
+      
+       
        
        System.out.println(a.toString());
        

@@ -13,28 +13,19 @@ public class TestArbolBB {
     public static void main(String[] args) {
        ArbolBB a = new ArbolBB();
        ArbolBB b = new ArbolBB();
-       a.insertar(10);
-       a.insertar(5);
-       a.insertar(2);
-       a.insertar(8);
-       a.insertar(1);
-       a.insertar(4);
-       a.insertar(6);
-      
-       a.insertar(9);
-       a.insertar(12);
-       a.insertar(11);
-       a.insertar(14);
+       a.insertar(56);
        a.insertar(13);
-       a.insertar(20);
-       a.insertar(21);
+       a.insertar(78);
+       a.insertar(7);
+       a.insertar(24);
+       a.insertar(100);
        a.insertar(15);
+      
+     
        
-       b.insertar(10);
-       b.insertar(9);
-       b.insertar(11);
-       b.insertar(12);
        System.out.println(a.toString());
+        System.out.println("");
+        System.out.println(a.clonarParteInvertida(13));
        ///a.eliminar(20);
         
       
@@ -46,7 +37,7 @@ public class TestArbolBB {
         System.out.println(a.maximoElem());*/
         //a.eliminarMinimoElem();
         //a.eliminar(11);
-        System.out.println(a.listarRango(5, 10));
+        System.out.println(a.listarRango(5, 56));
        
     }
     

@@ -374,5 +374,35 @@ public class ArbolBB {
         }
         return res;
     }
+    public ArbolBB clonarParteInvertida(int elem){
+        ArbolBB c = new ArbolBB();
+        c.raiz = clonarInvertidoAux(obtenerNodo(this.raiz,elem));
+        return c;
+    }
+    private NodoArbol clonarInvertidoAux(NodoArbol n){
+        NodoArbol nClon = null;
+        if(n != null){
+            
+                nClon = new NodoArbol(n.getElem());
+                nClon.setIzq(clonarInvertidoAux(n.getDer()));
+                nClon.setDer(clonarInvertidoAux(n.getIzq()));
+            }
+        
+        return nClon;
+    }
+    private NodoArbol obtenerNodo(NodoArbol n,int elem){
+        NodoArbol res = null;
+        if(n != null){
+            if(n.getElem() == elem){
+                res = n;
+            }else{
+                res = obtenerNodo(n.getIzq(),elem);
+                if(res == null){
+                    res = obtenerNodo(n.getDer(),elem);
+                }
+            }
+        }
+        return res;
+    }
 
 }

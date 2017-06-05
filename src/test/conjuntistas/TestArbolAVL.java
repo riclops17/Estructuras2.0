@@ -12,14 +12,13 @@ import conjuntistas.ArbolAVL;
 public class TestArbolAVL {
     public static void main(String[] args) {
         ArbolAVL a = new ArbolAVL();
-        a.insertar(12);
-        a.insertar(5);
+        a.insertar(56);
+        a.insertar(34);
+        a.insertar(78);
         a.insertar(23);
-        a.insertar(3);
-        a.insertar(8);
-        a.insertar(10);
-     
-        
+        a.insertar(63);
+        a.insertar(89);
+        a.insertar(22);
         
        
         System.out.println(a.toString());
