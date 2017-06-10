@@ -20,12 +20,16 @@ public class TestArbolBB {
        a.insertar(24);
        a.insertar(100);
        a.insertar(15);
+       a.insertar(50);
       
-     
-       
+       b.insertar(1);
+       b.insertar(7);
+       b.insertar(10);
+       b.insertar(20);
+       b.eliminarMinimoElem();
        System.out.println(a.toString());
-        System.out.println("");
-        System.out.println(a.clonarParteInvertida(13));
+       System.out.println(a.listarMayorIgual(24));
+        //System.out.println(a.clonarParteInvertida(13));
        ///a.eliminar(20);
         
       
@@ -37,7 +41,7 @@ public class TestArbolBB {
         System.out.println(a.maximoElem());*/
         //a.eliminarMinimoElem();
         //a.eliminar(11);
-        System.out.println(a.listarRango(5, 56));
+       // System.out.println(a.listarRango(5, 56));
        
     }
     

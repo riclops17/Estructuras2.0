@@ -19,13 +19,14 @@ public class TestArbolGen {
         a.insertar(1, 1);
         a.insertar(2, 1);
         a.insertar(3, 1);
-        a.insertar('b', 1);
+        a.insertar(6, 1);
         a.insertar(5, 2);
-        a.insertar('a', 5);
+        a.insertar(9, 5);
         
         l1.insertar(20, 1);
-        l1.insertar(13, 2);
-        l1.insertar(15, 3);
+        l1.insertar(54, 2);
+        l1.insertar(5, 3);
+        
         
         b.insertar(20, 20);
         b.insertar(13, 20);
@@ -36,10 +37,25 @@ public class TestArbolGen {
         b.insertar(27,54);
         b.insertar(4, 54);
         b.insertar(17, 27);
-      
-        System.out.println(c.toString());
-        System.out.println(b.verificarListaInorden(l1));
+    
         
+        
+        
+        c.insertar(20, 20);
+        c.insertar(13, 20);
+        c.insertar(15, 13);
+        c.insertar(11, 20);
+       
+        
+//        c= b.clonar();
+//        c.insertar(7, 54);
+        
+        //System.out.println(c.toString());
+   
+        System.out.println(b.toString());
+        System.out.println();
+        System.out.println(b.toString());
+       
        
        
         /*System.out.println(a.pertenece(8));

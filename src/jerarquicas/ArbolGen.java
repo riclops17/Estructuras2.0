@@ -71,25 +71,7 @@ public class ArbolGen {
         return res;
     }
 
-    public Object padre(Object elem) {
-        return padreAux(this.raiz, elem);
-    }
-
-    private Object padreAux(NodoGen n, Object elem) {
-        Object res = -1;
-        if (n != null) {
-            if (n.getEIzq() != null && n.getEIzq().getElem().equals(elem)) {
-                res = n.getElem();
-            } else {
-                NodoGen hijo = n.getEIzq();
-                while (hijo != null && res.equals(-1)) {
-                    res = padreAux(hijo, elem);
-                    hijo = hijo.getHDer();
-                }
-            }
-        }
-        return res;
-    }
+   
 
     public Object nivel(Object elem) {
         return nivelAux(this.raiz, elem, 0);
@@ -117,14 +99,15 @@ public class ArbolGen {
 
     private int alturaAux(NodoGen n) {
         int res = -1;
-        if (n.getEIzq() == null) {
-            res = 0;
-        } else {
-            NodoGen hijo = n.getEIzq();
-            res = alturaAux(hijo) + 1;
-            while (hijo != null && res == -1) {
-                res = alturaAux(hijo);
-                hijo = hijo.getHDer();
+        if (n != null) {
+            if (n.getEIzq() == null) {
+                res = 0;
+            } else {
+                NodoGen hijo = n.getEIzq();
+                while (hijo != null && res == -1) {
+                    res = Math.max(alturaAux(hijo) + 1, alturaAux(hijo.getHDer()) + 1);
+                    hijo = hijo.getHDer();
+                }
             }
         }
         return res;
@@ -250,15 +233,40 @@ public class ArbolGen {
         }
     }
 
-    public void eliminarEHijoIzq(int elem) {
-        NodoGen n = obtenerNodoPadre(this.raiz, elem);
+    public void eliminar(int elem) {
+        boolean res = true;
+        if (this.raiz.getElem().equals(elem)) {
+            this.raiz = null;
+        } else {
+            NodoGen n = obtenerNodoPadre(this.raiz, elem);
+            if (n != null) {
+                if (n.getEIzq() != null) {
+                    if (n.getEIzq().getElem().equals(elem)) {
+                        n.setEIzq(n.getEIzq().getHDer());
+                    } else {
+                        NodoGen aux = n.getEIzq();
+
+                        while (aux.getHDer() != null && res) {
+                            if (aux.getHDer().getElem().equals(elem)) {
+                                res = false;
+                            }
+                            aux = aux.getHDer();
+                        }
+                        aux.setHDer(n.getHDer().getHDer());
+                    }
+
+                }
+
+            }
+
+        }
 
     }
 
     private NodoGen obtenerNodoPadre(NodoGen n, Object elem) {
         NodoGen res = null;
         if (n != null) {
-            if (n.getEIzq() != null && n.getEIzq().getElem().equals(elem)) {
+            if (n.getEIzq() != null && n.getEIzq().getElem().equals(elem)|| n.getHDer() != null && n.getHDer().getElem().equals(elem)) {
                 res = n;
             } else {
                 NodoGen hijo = n.getEIzq();
@@ -336,7 +344,7 @@ public class ArbolGen {
     }
 
     public boolean verificarPatron(Lista l1) {
-        return verificarPatronAux2(this.raiz, l1);
+        return verificarPatronAux(this.raiz, l1);
     }
 
     private boolean verificarPatronAux(NodoGen n, Lista l1) {
@@ -344,7 +352,7 @@ public class ArbolGen {
         if (n != null) {
             NodoGen hijo = n.getEIzq();
             if (hijo != null) {
-                res = verificarPatronAux2(hijo, l1);
+                res = verificarPatronAux(hijo, l1);
             }
 
             if (!l1.esVacia() && n.getElem().equals(l1.recuperar(1)) && res) {
@@ -361,27 +369,7 @@ public class ArbolGen {
         return res;
     }
 
-    private boolean verificarPatronAux2(NodoGen n, Lista l1) {
-        boolean res = false;
-        if (n != null) {
-            if (l1.longitud() == 1 && n.getEIzq() == null && n.getElem().equals(l1.localizar(1))) {
-                res = true;
-            } else {
-                if (n.getElem().equals(l1.localizar(1))) {
-                    res = true;
-                    NodoGen hijo = n.getEIzq();
-                    l1.eliminar(1);
-                    while (hijo != null && res == true) {
-                        res = verificarPatronAux2(hijo, l1);
-                        hijo = hijo.getHDer();
-
-                    }
-                   
-                }
-            }
-        }
-        return res;
-    }
+   
 
     public boolean equals(ArbolGen otro) {
         return equalsAux(this.raiz, otro.raiz);
@@ -390,64 +378,111 @@ public class ArbolGen {
     private boolean equalsAux(NodoGen n, NodoGen n2) {
         boolean res = false;
         if (n != null && n2 != null) {
-            if (n.getEIzq() == null && n2.getEIzq() == null ) {
-                if(n.getElem().equals(n2.getElem())){
-                    res = true;
-                }else{
-                    res = false;
-                }
-                
+            System.out.println("llama con n " + n.getElem() + " n2 " + n2.getElem());
+            if (n.getEIzq() == null && n2.getEIzq() == null && n.getElem().equals(n2.getElem())) {
+                res = true;
             } else {
                 NodoGen hijo = n.getEIzq();
                 NodoGen hijo2 = n2.getEIzq();
                 if (n.getElem().equals(n2.getElem())) {
                     res = true;
-
                     while (hijo != null && hijo2 != null && res == true) {
                         res = equalsAux(hijo, hijo2);
                         hijo = hijo.getHDer();
                         hijo2 = hijo2.getHDer();
                     }
+                    if (hijo == null && hijo2 != null || hijo != null && hijo2 == null) {
+                        res = false;
+                    }
                 }
-                    
-                
+
             }
 
         }
+
+        System.out.println("sale con n " + n.getElem() + " n2 " + n2.getElem() + " - " + res);
+
         return res;
     }
-    public boolean verificarListaInorden(Lista ls) {
-	Lista copia = ls.clonar();
-	boolean res = verificarListaInordenAux(raiz, copia);
+    public Object padre(Object elemento) {
+        return padreAux(raiz, elemento);
+    }
 
-	if (!copia.esVacia()) {
-		res = false;
-	}
+    private Object padreAux(NodoGen nodo, Object elemento) {
+        Object resultado = null;
 
-	return res;
+        if (nodo != null) {
+            boolean val = false;
+            if (nodo.getElem().equals(elemento) ) {
+                val = true;
+            }
+            if (!val) {
+                NodoGen hijo = nodo.getEIzq();
+                while (hijo != null && resultado == null) {
+                    boolean value = false;
+                    if (hijo.getElem().equals(elemento)) {
+                        value = true;
+                    }
+                    if (value) {
+                        resultado = nodo.getElem();
+                    } else {
+                        resultado = padreAux(hijo, elemento);
+                        hijo = hijo.getHDer();
+                    }
+                }
+            }
+        }
+        return resultado;
+    }
+    public Lista listarHastaNivel(int niv){
+        Lista l1 = new Lista();
+        listarHastaNivelAux(this.raiz,niv,l1,0);
+        return l1;
+    }
+    private void listarHastaNivelAux(NodoGen n,int niv,Lista l1,int piso){
+        if(n!= null && piso <= niv){
+            if(piso <= niv){
+                l1.insertar(n.getElem(), l1.longitud() +1);
+            }
+            NodoGen hijo = n.getEIzq();
+            while(hijo != null){
+                listarHastaNivelAux(hijo,niv,l1,piso+1);
+                hijo = hijo.getHDer();
+            }
+        }
+    }
+    public boolean verificarCamino(Lista l1){
+        return verificarCaminoAux(this.raiz,l1);
+    }
+    private boolean verificarCaminoAux(NodoGen n , Lista l1){
+        boolean res = false;
+        if(n != null){
+            if(l1.longitud() == 1 && n.getEIzq() == null && n.getElem().equals(l1.recuperar(1))){
+                res = true;
+            }else{
+                if(  n.getElem().equals(l1.recuperar(1))){
+                    res = true;
+                    l1.eliminar(1);
+                    NodoGen hijo = n.getEIzq();
+                    while(!l1.esVacia() && hijo != null &&  !res  ){
+                        res = verificarCaminoAux(hijo,l1);
+                        hijo = hijo.getEIzq();
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    public void eliminarHijoEIzq(Object elem){
+        NodoGen n = obtenerNodo(this.raiz,elem);
+        if(n.getEIzq() != null){
+         n.setEIzq(n.getEIzq().getHDer());
+        }
+    }
 }
 
-private boolean verificarListaInordenAux(NodoGen n, Lista ls) {
-	boolean res = true;
 
-	if (n != null) {
-		NodoGen hijo = n.getEIzq();
 
-		if (hijo != null) {
-			res = verificarListaInordenAux(hijo, ls);
-		}
 
-		if (!ls.esVacia() && n.getElem().equals(ls.recuperar(1)) && res) {
-			ls.eliminar(1);
-			while (hijo != null && res) {
-				res = verificarListaInordenAux(hijo.getHDer(), ls);
-				hijo = hijo.getHDer();
-			}
-		} else {
-			res = false;
-		}
-	}
 
-	return res;
-}
-}
+    

@@ -96,16 +96,7 @@ public class ArbolBB {
 
     }
 
-    private void listarRangoAux(NodoArbol n, int elemMinimo, int elemMaximo, ListaInt l1) {
-        if (n != null) {
-            listarRangoAux(n.getIzq(), elemMinimo, elemMaximo, l1);
-            if (n.getElem() >= elemMinimo && n.getElem() <= elemMaximo) {
-                l1.insertar(n.getElem(), l1.longitud() + 1);
-            }
-            listarRangoAux(n.getDer(), elemMinimo, elemMaximo, l1);
-        }
-    }
-
+    
     public String toString() {
         String s = "";
         if (this.raiz != null) {
@@ -179,6 +170,8 @@ public class ArbolBB {
     private void eliminarMinimoElemAux(NodoArbol n) {
         NodoArbol aux = null;
         if (n != null) {
+            if(n.getIzq() != null){
+                
             while (n.getIzq().getIzq() != null) {
                 n = n.getIzq();
             }
@@ -186,7 +179,11 @@ public class ArbolBB {
                 aux = n.getIzq().getDer();
             }
             n.setIzq(aux);
-        }
+        }else{
+               this.raiz = n.getDer();
+            }
+            
+    }
     }
 
     public void eliminar(int elem) {
@@ -404,5 +401,24 @@ public class ArbolBB {
         }
         return res;
     }
-
+    public ListaInt listarMayorIgual(int elem){
+        ListaInt l1 = new ListaInt();
+        listarMayorIgualAux( this.raiz,elem,l1);
+        return l1;
+    }
+    private void listarMayorIgualAux(NodoArbol n, int elem,ListaInt l1){
+      if(n != null){
+          
+           listarMayorIgualAux(n.getDer(),elem,l1);
+          
+          if(n.getElem() >= elem){
+              l1.insertar(n.getElem(), l1.longitud() +1);
+          }
+           if(n.getIzq() != null &&  !(n.getIzq().getElem() == elem)){
+            listarMayorIgualAux(n.getIzq(),elem,l1);
+           }
+           
+  }
+      
+}
 }
